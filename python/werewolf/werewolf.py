@@ -96,8 +96,8 @@ def divvy(nList, rList):
             return [nList[0]] + [rList[rChoice]]
     else:
             nChoice = random.randint(0, len(nList) - 1)
-            # ensure that there are 2 wolves, 1 detective, and at least 4 villagers
-            if(rList[0] == "wolf" or rList[0] == "detective" or rList[0] == "bodyguard" or rList[0] == "villager"):
+            # ensure that the number of wolves and villagers are as the user requested and there are 1 of each detective and bodyguard
+            if(rList[0] == "wolf" or rList[0] == "villager") or rList[0] == "detective" or rList[0] == "bodyguard":
                   rChoice = 0
             else:
                   rChoice = random.randint(0, len(rList) - 1)
