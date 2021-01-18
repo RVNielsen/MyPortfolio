@@ -174,7 +174,14 @@ int main()
                         cout << p2.getCorLetters()[g];
                   }                 
             }
-            cout << "\n\nYou have " << p2.getRemainingStrikes() << " strikes left!\n";
+            if(p2.getRemainingStrikes() == 1)
+            {
+                  cout << "\n\nYou have " << p2.getRemainingStrikes() << " strike left!\n";    
+            }
+            else
+            {
+                  cout << "\n\nYou have " << p2.getRemainingStrikes() << " strikes left.\n";    
+            }
       }
 
       return 0;
