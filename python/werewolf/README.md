@@ -6,7 +6,7 @@ I made this program to play the social deduction game "Ultimate Werewolf" online
 python3 werewolf.py
 ```
 
-## Usage
+## Usage (example)
 ```
 How many wolves (1 - 3)? One wolf for every 4 players is a good rule-of-thumb: a
 Invalid, try again.
