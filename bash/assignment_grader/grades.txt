@@ -1,0 +1,4 @@
+duckd, 0
+leopoldj, 100
+simpsonh, 33*
+studentn, 33*
