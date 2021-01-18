@@ -1,4 +1,4 @@
 #!bin/bash
 
-g++ hangman.cpp hangman1.cpp hangman2.cpp
+g++ main.cpp player1.cpp player2.cpp
 ./a.out

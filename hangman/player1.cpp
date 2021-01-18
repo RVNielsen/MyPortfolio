@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "hangman.h"
+#include "main.h"
 using namespace std;
 
 void Player1::setWord()

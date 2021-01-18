@@ -1,5 +1,5 @@
 #include <iostream>
-#include "hangman.h"
+#include "main.h"
 using namespace std;
 
 bool checkAnswer(string ansStr, string letStr, int ansLen, int letLen)

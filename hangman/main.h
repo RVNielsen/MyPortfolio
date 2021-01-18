@@ -1,6 +1,6 @@
 #include <iostream>
-#include "hangman1.h"
-#include "hangman2.h"
+#include "player1.h"
+#include "player2.h"
 using namespace std;
 
 // check if player 2 has guessed the complete word

@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "hangman.h"
+#include "main.h"
 using namespace std;
 
 bool Player2::keepPlaying(string p1Answer)
