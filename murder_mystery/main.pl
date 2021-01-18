@@ -2,10 +2,8 @@
 access(X, Y):-weapon_access(X, Y), key_access(X), crime_access(X).
 
 %b
-weapon_access(X, patties):-whereabouts(X, thursday, havener); whereabouts(X, 
-      wednesday, library).
-weapon_access(X, toiletseat):-whereabouts(X, wednesday, csbuilding); whereabouts(X, 
-      thursday, csbuilding).
+weapon_access(X, patties):-whereabouts(X, thursday, havener); whereabouts(X, wednesday, library).
+weapon_access(X, toiletseat):-whereabouts(X, wednesday, csbuilding); whereabouts(X, thursday, csbuilding).
 
 %c
 key_access(X):-whereabouts(X, monday, library); whereabouts(X, tuesday, havener).
