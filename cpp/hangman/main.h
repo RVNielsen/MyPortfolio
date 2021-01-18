@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include "player1.h"
 #include "player2.h"
 using namespace std;

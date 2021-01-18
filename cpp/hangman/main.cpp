@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include "main.h"
 using namespace std;
 
@@ -34,9 +35,8 @@ int main()
 {      
       // player 1 picks the word
       Player1 p1;
-      string answer;
       p1.setWord();
-      answer = string(p1.getWord());
+
 
       // player 2 guesses letters
       Player2 p2;
@@ -78,10 +78,11 @@ int main()
       while(1)
       {
             // if too many incorrect strikes have been made, reveal the answer and end
-            if(!p2.keepPlaying(answer))
+            if(!p2.keepPlaying(p1.getWord()))
             {
                   break;
             }
+      
 
             cout << endl << endl;
 
@@ -91,7 +92,7 @@ int main()
             {
                   for(int i = 0; i < p2.getCorLettersLen(); i = i + 3)
                   {
-                        if(answer[u] == p2.getCorLetters()[i])
+                        if(p1.getAnswer()[u] == p2.getCorLetters()[i])
                         {
                               cout << p2.getCorLetters()[i] << " ";
                               needSpace = false;
@@ -104,6 +105,7 @@ int main()
                   }
                   needSpace = true;
             }
+
 
             cout << endl << endl;
 

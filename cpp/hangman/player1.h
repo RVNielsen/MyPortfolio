@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 using namespace std;
 
 class Player1
@@ -6,6 +7,7 @@ class Player1
       private:
       // the word in the form of a character array
       char * arrayWord;
+      string answer;
 
       // length of the word
       int wordLen;
@@ -18,6 +20,10 @@ class Player1
       void setWord();
 
       char * getWord() { return arrayWord; }
+
+      void setAnswer();
+
+      string getAnswer() { return answer; }
 
       // set wordLen to an integer
       void setLen(int);

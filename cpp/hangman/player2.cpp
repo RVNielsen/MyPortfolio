@@ -6,6 +6,7 @@ using namespace std;
 bool Player2::keepPlaying(string p1Answer)
 {
       man();
+      cout << "here in keep playing" << endl;
       if(strikes == maxStrikes)
       {
             cout << "You lose, the word was " << p1Answer << endl;

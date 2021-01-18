@@ -15,8 +15,6 @@ void Player1::setWord()
             cout << "Player 1, write a word with at least 3 letters: \n";   
             getline(cin, line);
 
-            cout << "line.length() " << line.length() << endl;
-
             setLen(line.length());
             for(int b = 0; b < line.length(); b++)
             {
@@ -26,12 +24,24 @@ void Player1::setWord()
       // try again if word is too short
       } while (wordLen < 3);
 
+      setAnswer();
+
       cout << string(50, '\n');
 }
+
 
 void Player1::setLen(int newLen)
 {
       wordLen = newLen;
+}
+
+void Player1::setAnswer()
+{
+      for(int n = 0; n < wordLen; n++)
+      {
+            answer[n] = arrayWord[n];
+      }
+      cout << "answer is: " << answer << endl;
 }
 
 char * Player1::updateWord(char currentWord[], int currentLen, int index)
@@ -80,6 +90,6 @@ void Player1::lowercaseWord()
       if(wordLen < 3)
       {
             cout << "The word needs to be at least one letter long and can"
-                  << "only consist of lower case letters, try again.\n";
+                  << " only consist of lower case letters, try again.\n";
       }
 }
