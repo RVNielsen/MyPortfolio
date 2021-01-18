@@ -8,11 +8,17 @@ bash hangman.sh
 
 ## Table of Contents
 hangman.sh - bash script for running all the cpp files together
+
 main.cpp - main and checkAnswer functions
+
 main.h - function prototype for checkAnswer
+
 player1.cpp - Player1 class function declarations
+
 player1.h - Player1 class, variables, and public function prototypes
+
 player2.cpp - Player2 class function declarations
+
 player2.h - Player2 class, variables, and public function prototypes
 
 ## Usage
