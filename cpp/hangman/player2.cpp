@@ -6,10 +6,9 @@ using namespace std;
 bool Player2::keepPlaying(string p1Answer)
 {
       man();
-      cout << "here in keep playing" << endl;
       if(strikes == maxStrikes)
       {
-            cout << "You lose, the word was " << p1Answer << endl;
+            cout << "You lose, the word was " << p1Answer << "." << endl;
             return false;
       }
       else if(checkAnswer(p1Answer, corLetters, p1Answer.length(), corLetters.length()))

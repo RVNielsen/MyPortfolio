@@ -78,12 +78,11 @@ int main()
       while(1)
       {
             // if too many incorrect strikes have been made, reveal the answer and end
-            if(!p2.keepPlaying(p1.getWord()))
+            if(!p2.keepPlaying(p1.getAnswer()))
             {
                   break;
             }
       
-
             cout << endl << endl;
 
             // output the word with blanks and correctly guessed letters

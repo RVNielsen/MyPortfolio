@@ -7,6 +7,7 @@ class Player1
       private:
       // the word in the form of a character array
       char * arrayWord;
+      string strWord;
       string answer;
 
       // length of the word

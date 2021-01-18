@@ -29,7 +29,6 @@ void Player1::setWord()
       cout << string(50, '\n');
 }
 
-
 void Player1::setLen(int newLen)
 {
       wordLen = newLen;
@@ -39,9 +38,8 @@ void Player1::setAnswer()
 {
       for(int n = 0; n < wordLen; n++)
       {
-            answer[n] = arrayWord[n];
+            answer = answer + arrayWord[n];
       }
-      cout << "answer is: " << answer << endl;
 }
 
 char * Player1::updateWord(char currentWord[], int currentLen, int index)
