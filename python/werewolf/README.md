@@ -7,6 +7,7 @@ python3 werewolf.py
 ```
 
 ## Usage
+```
 How many wolves (1 - 3)? One wolf for every 4 players is a good rule-of-thumb: a
 Invalid, try again.
 How many wolves (1 - 3)? One wolf for every 4 players is a good rule-of-thumb: 7
@@ -92,3 +93,4 @@ Ellie      :  hunter
 Brenda     :  witness
 
 Bob        :  chief of police
+```
