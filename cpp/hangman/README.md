@@ -48,7 +48,7 @@ r
 ---Incorrect Letters---     ---Correct Letters---
                            r
 
-You have 4 strikes left!
+You have 4 strikes left.
 -----
 |   |
 |
@@ -68,7 +68,7 @@ e
 ---Incorrect Letters---     ---Correct Letters---
                            r, e
 
-You have 4 strikes left!
+You have 4 strikes left.
 -----
 |   |
 |
@@ -88,7 +88,7 @@ i
 ---Incorrect Letters---     ---Correct Letters---
  i                         r, e
 
-You have 3 strikes left!
+You have 3 strikes left.
 -----
 |   |
 |   o
@@ -108,7 +108,7 @@ w
 ---Incorrect Letters---     ---Correct Letters---
  i                         r, e, w
 
-You have 3 strikes left!
+You have 3 strikes left.
 -----
 |   |
 |   o
@@ -128,7 +128,7 @@ n
 ---Incorrect Letters---     ---Correct Letters---
  i, n                      r, e, w
 
-You have 2 strikes left!
+You have 2 strikes left.
 -----
 |   |
 |   o
@@ -148,7 +148,7 @@ l
 ---Incorrect Letters---     ---Correct Letters---
  i, n, l                   r, e, w
 
-You have 1 strikes left!
+You have 1 strike left!
 -----
 |   |
 |   o
@@ -168,7 +168,7 @@ s
 ---Incorrect Letters---     ---Correct Letters---
  i, n, l                   r, e, w, s
 
-You have 1 strikes left!
+You have 1 strike left!
 -----
 |   |
 |   o
@@ -188,7 +188,7 @@ a
 ---Incorrect Letters---     ---Correct Letters---
  i, n, l                   r, e, w, s, a
 
-You have 1 strikes left!
+You have 1 strike left!
 -----
 |   |
 |   o
@@ -208,7 +208,7 @@ t
 ---Incorrect Letters---     ---Correct Letters---
  i, n, l                   r, e, w, s, a, t
 
-You have 1 strikes left!
+You have 1 strike left!
 -----
 |   |
 |   o
@@ -228,7 +228,7 @@ b
 ---Incorrect Letters---     ---Correct Letters---
  i, n, l                   r, e, w, s, a, t, b
 
-You have 1 strikes left!
+You have 1 strike left!
 -----
 |   |
 |   o
@@ -248,7 +248,7 @@ y
 ---Incorrect Letters---     ---Correct Letters---
  i, n, l                   r, e, w, s, a, t, b, y
 
-You have 1 strikes left!
+You have 1 strike left!
 -----
 |   |
 |   o
