@@ -8,6 +8,7 @@ gcl
 ```
 
 ## Usage
+Running the two scenarios at the bottom of the code results in these sums.
 ```
 sum =  -191.33333333333335
 sum =  -226.0
