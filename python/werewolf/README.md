@@ -29,8 +29,7 @@ bodyguard
 villager
 villager
 villager
-Enter the name of a player. Write "done" when all players have been added. For list 
-      of players already added, write "list":
+Enter the name of a player. Write "done" when all players have been added. For list of players already added, write "list":
 
 Player 0: Jenna
 Jenna added to players
