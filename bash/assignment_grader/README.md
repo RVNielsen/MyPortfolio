@@ -20,6 +20,30 @@ inflating: ./submissions/leopoldj.pl
 inflating: ./submissions/simpsonh.pl
 inflating: ./submissions/studentn.pl
 ```
+
+## Table of Contents
+counters - this folder includes a file for each student which contains information about how many correct programs they have submitted
+
+expectedOutput - this unzipped folder includes a file for each assignment being graded with the exact output the students' programs should result in after running the sample input
+
+myOutput - this folder contains the output of each student's program after running them with the sample input
+
+sampleInput - this unzipped folder contains files to be fed to the students' programs
+
+submissions - this unzipped folder contians the students' programs
+
+assignment_grader.sh - the main file containing the bash script
+
+expectedOutput.zip - the original expected output folder
+
+grades.txt - this file contains the information gathered by the bash script about the students' grades
+
+nameFile.txt - this file contains the last name and first initial of one student at a time and is used by the bash script
+
+sampleInput.zip - the original sample input folder
+
+submissions.zip - the original submissions folder
+
 ## Usage
 The grades.txt file will look like this after running the bash script:
 ```
