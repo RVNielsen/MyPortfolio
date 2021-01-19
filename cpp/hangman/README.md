@@ -26,3 +26,4 @@ player2.cpp - Player2 class function declarations
 player2.h - Player2 class, variables, and public function prototypes
 
 ## Usage
+Both example files show how the game is played in the command line. After running the bash script, players can just follow the instuctions that are given in order to play the game.
