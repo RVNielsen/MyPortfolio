@@ -1,0 +1,274 @@
+Player 1, write a word with at least 3 letters:
+hi345
+The word needs to be at least one letter long and can only consist of lower case letters, try again.
+Player 1, write a word with at least 3 letters:
+hi
+The word needs to be at least one letter long and can only consist of lower case letters, try again.
+Player 1, write a word with at least 3 letters:
+345
+The word needs to be at least one letter long and can only consist of lower case letters, try again.
+Player 1, write a word with at least 3 letters:
+chicken89 (and) waf_fles
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+_ _ _ _ _ _ _   _ _ _   _ _ _ _ _ _ _
+
+Player 2, guess a letter:
+2
+Sorry, only lowercase letters please.
+Player 2, guess a letter:
+G
+
+
+
+
+---Incorrect Letters---     ---Correct Letters---
+g
+
+You have 4 strikes left.
+-----
+|   |
+|
+|
+|
+|
+
+
+_ _ _ _ _ _ _   _ _ _   _ _ _ _ _ _ _
+
+Player 2, guess a letter:
+jk
+
+
+
+
+---Incorrect Letters---     ---Correct Letters---
+g, j
+
+You have 3 strikes left.
+-----
+|   |
+|   o
+|
+|
+|
+
+
+_ _ _ _ _ _ _   _ _ _   _ _ _ _ _ _ _
+
+Player 2, guess a letter:
+i w
+
+
+
+
+---Incorrect Letters---     ---Correct Letters---
+g, j                        i
+
+You have 3 strikes left.
+-----
+|   |
+|   o
+|
+|
+|
+
+
+_ _ i _ _ _ _   _ _ _   _ _ _ _ _ _ _
+
+Player 2, guess a letter:
+c
+
+
+
+
+---Incorrect Letters---     ---Correct Letters---
+g, j                        i, c
+
+You have 3 strikes left.
+-----
+|   |
+|   o
+|
+|
+|
+
+
+c _ i c _ _ _   _ _ _   _ _ _ _ _ _ _
+
+Player 2, guess a letter:
+h
+
+
+
+
+---Incorrect Letters---     ---Correct Letters---
+g, j                        i, c, h
+
+You have 3 strikes left.
+-----
+|   |
+|   o
+|
+|
+|
+
+
+c h i c _ _ _   _ _ _   _ _ _ _ _ _ _
+
+Player 2, guess a letter:
+a
+
+
+
+
+---Incorrect Letters---     ---Correct Letters---
+g, j                        i, c, h, a
+
+You have 3 strikes left.
+-----
+|   |
+|   o
+|
+|
+|
+
+
+c h i c _ _ _   a _ _   _ a _ _ _ _ _
+
+Player 2, guess a letter:
+i
+That letter has already been guessed, try again.
+Player 2, guess a letter:
+()
+Sorry, only lowercase letters please.
+Player 2, guess a letter:
+l
+
+
+
+
+---Incorrect Letters---     ---Correct Letters---
+g, j                        i, c, h, a, l
+
+You have 3 strikes left.
+-----
+|   |
+|   o
+|
+|
+|
+
+
+c h i c _ _ _   a _ _   _ a _ _ l _ _
+
+Player 2, guess a letter:
+h
+That letter has already been guessed, try again.
+Player 2, guess a letter:
+b
+
+
+
+
+---Incorrect Letters---     ---Correct Letters---
+g, j, b                     i, c, h, a, l
+
+You have 2 strikes left.
+-----
+|   |
+|   o
+|   |
+|
+|
+
+
+c h i c _ _ _   a _ _   _ a _ _ l _ _
+
+Player 2, guess a letter:
+y
+
+
+
+
+---Incorrect Letters---     ---Correct Letters---
+g, j, b, y                  i, c, h, a, l
+
+You have 1 strike left!
+-----
+|   |
+|   o
+|  /|\
+|
+|
+
+
+c h i c _ _ _   a _ _   _ a _ _ l _ _
+
+Player 2, guess a letter:
+qwerty
+
+
+
+
+---Incorrect Letters---     ---Correct Letters---
+g, j, b, y, q               i, c, h, a, l
+
+You have 0 strikes left.
+-----
+|   |
+|   o
+|  /|\
+|  / \
+|
+You lose, the word was chicken and waffles.
