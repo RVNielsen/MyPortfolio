@@ -18,7 +18,7 @@ Player 1, write a word with at least 3 letters:
 hi345
 The word needs to be at least one letter long and can only consist of lower case letters, try again.
 ```
-numbers and special characters were removed (besides spaces) leaving a valid "word" - chicken and waffles
+numbers and special characters were removed (besides spaces) leaving a valid word - "chicken and waffles"
 
 uppercase letters were also changed to lowercase 
 ```txt
