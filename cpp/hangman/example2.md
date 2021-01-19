@@ -23,7 +23,6 @@ uppercase letters were also changed to lowercase
 The word needs to be at least one letter long and can only consist of lower case letters, try again.
 Player 1, write a word with at least 3 letters:
 chiCken89 (and) waf_flEs
-
 ```
 (there are normally about 50 blank lines here when running in the command line so that player 2 does not see the word, but they were removed for readability)
 
@@ -165,7 +164,7 @@ You have 3 strikes left.
 
 c h i c _ _ _   a _ _   _ a _ _ _ _ _
 ```
-the player is asked for a letter until a letter that has not been guessed already is picked
+the player is asked for a letter until they pick one that has not already been guessed
 ```txt
 Player 2, guess a letter:
 i
