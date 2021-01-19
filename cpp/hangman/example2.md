@@ -1,14 +1,25 @@
-Player 1, write a word with at least 3 letters:
-hi345
-The word needs to be at least one letter long and can only consist of lower case letters, try again.
-Player 1, write a word with at least 3 letters:
-hi
-The word needs to be at least one letter long and can only consist of lower case letters, try again.
+the word consisted of no letters
+```
 Player 1, write a word with at least 3 letters:
 345
 The word needs to be at least one letter long and can only consist of lower case letters, try again.
+```
+the word is only two letters
+```
 Player 1, write a word with at least 3 letters:
-chicken89 (and) waf_fles
+hi
+The word needs to be at least one letter long and can only consist of lower case letters, try again.
+```
+numbers were removed only leaving two letters
+Player 1, write a word with at least 3 letters:
+hi345
+```
+numbers and special characters were removed (besides spaces) leaving a valid "word"
+uppercase letters were also changed to lowercase 
+```
+The word needs to be at least one letter long and can only consist of lower case letters, try again.
+Player 1, write a word with at least 3 letters:
+chiCken89 (and) waf_flEs
 
 
 
@@ -59,13 +70,20 @@ chicken89 (and) waf_fles
 
 
 
-
-
+```
+the number of letters is represented by underscores and spaces are automatically filled in
+```
 _ _ _ _ _ _ _   _ _ _   _ _ _ _ _ _ _
+```
 
+the guess was not a letter
+```
 Player 2, guess a letter:
 2
 Sorry, only lowercase letters please.
+```
+the uppercase letter was turned into a lowercase one when searching through the word
+```
 Player 2, guess a letter:
 G
 
@@ -85,7 +103,9 @@ You have 4 strikes left.
 
 
 _ _ _ _ _ _ _   _ _ _   _ _ _ _ _ _ _
-
+```
+only the first letter inputted is considered
+```
 Player 2, guess a letter:
 jk
 
@@ -105,7 +125,9 @@ You have 3 strikes left.
 
 
 _ _ _ _ _ _ _   _ _ _   _ _ _ _ _ _ _
-
+```
+even when spaces are added
+```
 Player 2, guess a letter:
 i w
 
@@ -185,7 +207,9 @@ You have 3 strikes left.
 
 
 c h i c _ _ _   a _ _   _ a _ _ _ _ _
-
+```
+the player is asked for a letter until a letter that has not been guessed already is picked
+```
 Player 2, guess a letter:
 i
 That letter has already been guessed, try again.
@@ -272,3 +296,4 @@ You have 0 strikes left.
 |  / \
 |
 You lose, the word was chicken and waffles.
+```
