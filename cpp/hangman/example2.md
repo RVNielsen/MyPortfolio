@@ -13,6 +13,7 @@ hi
 The word needs to be at least one letter long and can only consist of lower case letters, try again.
 ```
 numbers were removed only leaving two letters
+```
 Player 1, write a word with at least 3 letters:
 hi345
 ```
@@ -96,13 +97,16 @@ G
 g
 
 You have 4 strikes left.
+
+```
+(the md file type does not display the hangman correctly)
 -----
 |   |
 |
 |
 |
 |
-
+```
 
 _ _ _ _ _ _ _   _ _ _   _ _ _ _ _ _ _
 ```
@@ -118,6 +122,7 @@ jk
 g, j
 
 You have 3 strikes left.
+```
 -----
 |   |
 |   o
@@ -125,7 +130,7 @@ You have 3 strikes left.
 |
 |
 
-
+```
 _ _ _ _ _ _ _   _ _ _   _ _ _ _ _ _ _
 ```
 even when spaces are added
@@ -140,6 +145,7 @@ i w
 g, j                        i
 
 You have 3 strikes left.
+```
 -----
 |   |
 |   o
@@ -147,7 +153,7 @@ You have 3 strikes left.
 |
 |
 
-
+```
 _ _ i _ _ _ _   _ _ _   _ _ _ _ _ _ _
 
 Player 2, guess a letter:
@@ -160,6 +166,7 @@ c
 g, j                        i, c
 
 You have 3 strikes left.
+```
 -----
 |   |
 |   o
@@ -167,7 +174,7 @@ You have 3 strikes left.
 |
 |
 
-
+```
 c _ i c _ _ _   _ _ _   _ _ _ _ _ _ _
 
 Player 2, guess a letter:
@@ -180,6 +187,7 @@ h
 g, j                        i, c, h
 
 You have 3 strikes left.
+```
 -----
 |   |
 |   o
@@ -187,7 +195,7 @@ You have 3 strikes left.
 |
 |
 
-
+```
 c h i c _ _ _   _ _ _   _ _ _ _ _ _ _
 
 Player 2, guess a letter:
@@ -200,6 +208,7 @@ a
 g, j                        i, c, h, a
 
 You have 3 strikes left.
+```
 -----
 |   |
 |   o
@@ -207,7 +216,7 @@ You have 3 strikes left.
 |
 |
 
-
+```
 c h i c _ _ _   a _ _   _ a _ _ _ _ _
 ```
 the player is asked for a letter until a letter that has not been guessed already is picked
@@ -228,6 +237,7 @@ l
 g, j                        i, c, h, a, l
 
 You have 3 strikes left.
+```
 -----
 |   |
 |   o
@@ -235,7 +245,7 @@ You have 3 strikes left.
 |
 |
 
-
+```
 c h i c _ _ _   a _ _   _ a _ _ l _ _
 
 Player 2, guess a letter:
@@ -251,6 +261,7 @@ b
 g, j, b                     i, c, h, a, l
 
 You have 2 strikes left.
+```
 -----
 |   |
 |   o
@@ -258,7 +269,7 @@ You have 2 strikes left.
 |
 |
 
-
+```
 c h i c _ _ _   a _ _   _ a _ _ l _ _
 
 Player 2, guess a letter:
@@ -271,6 +282,7 @@ y
 g, j, b, y                  i, c, h, a, l
 
 You have 1 strike left!
+```
 -----
 |   |
 |   o
@@ -278,7 +290,7 @@ You have 1 strike left!
 |
 |
 
-
+```
 c h i c _ _ _   a _ _   _ a _ _ l _ _
 
 Player 2, guess a letter:
@@ -291,11 +303,13 @@ qwerty
 g, j, b, y, q               i, c, h, a, l
 
 You have 0 strikes left.
+```
 -----
 |   |
 |   o
 |  /|\
 |  / \
 |
+```
 You lose, the word was chicken and waffles.
 ```
