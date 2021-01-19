@@ -16,11 +16,11 @@ numbers were removed only leaving two letters
 ```txt
 Player 1, write a word with at least 3 letters:
 hi345
+The word needs to be at least one letter long and can only consist of lower case letters, try again.
 ```
 numbers and special characters were removed (besides spaces) leaving a valid "word"
 uppercase letters were also changed to lowercase 
 ```txt
-The word needs to be at least one letter long and can only consist of lower case letters, try again.
 Player 1, write a word with at least 3 letters:
 chiCken89 (and) waf_flEs
 ```
