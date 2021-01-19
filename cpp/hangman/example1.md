@@ -3,7 +3,7 @@
 Player 1, write a word with at least 3 letters:
 strawberry
 ```
-When run in the command line, many blank lines are added here so that player 2 cannot see the word. The lines were cut in this example for readability
+When running in the command line, about 50 blank lines are added here so that player 2 cannot see the word. The lines were cut in this example for readability
 ```txt
 -----
 |   |
