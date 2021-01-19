@@ -24,56 +24,8 @@ The word needs to be at least one letter long and can only consist of lower case
 Player 1, write a word with at least 3 letters:
 chiCken89 (and) waf_flEs
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ```
+(there are normally about 50 blank lines here when running in the command line so that player 2 does not see the word, but they were removed for readability)
 the number of letters is represented by underscores and spaces are automatically filled in
 ```
 _ _ _ _ _ _ _   _ _ _   _ _ _ _ _ _ _
