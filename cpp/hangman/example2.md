@@ -52,12 +52,14 @@ You have 4 strikes left.
 
 ```
 (the md file type does not display the hangman correctly)
+```txt
 -----
 |   |
 |
 |
 |
 |
+```
 ```
 
 _ _ _ _ _ _ _   _ _ _   _ _ _ _ _ _ _
