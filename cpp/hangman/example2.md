@@ -1,4 +1,4 @@
-# Example 2
+# Example 2: Both players try and break the game
 ## How the program handles special cases
 the word consisted of no letters
 ```txt
