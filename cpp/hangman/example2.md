@@ -1,3 +1,5 @@
+# Example 2
+## How the program handles special cases
 the word consisted of no letters
 ```
 Player 1, write a word with at least 3 letters:
