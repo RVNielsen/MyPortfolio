@@ -18,7 +18,7 @@ void setup() {
   pinMode(ledPin, OUTPUT);
   pinMode(buttonChange, INPUT);
   pinMode(buttonDecide, INPUT);
-  //used for playTone
+  // used for playTone
   CircuitPlayground.begin();
 }
 
