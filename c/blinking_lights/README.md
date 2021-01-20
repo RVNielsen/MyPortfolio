@@ -1,7 +1,7 @@
 # Blinking Lights: Adafruit Circuit Playground
-This program uses both buttons on the microcontroller as well as the light. The light blinks at a rate determined by information given by the two buttons. The left button controls the mode. When pressed, it switches between increasing and decreasing mode. In increasing mode, if the right button is pressed, the light blinks faster. In decreasing mode, the opposite effect happens. There are 5 frequency levels for the blinking light: on, very slow, slow, fast, very fast, off. When the right button press causes the mode to loop back around (from "off" forward to "on" or "on" back to "off"), a tone sounds on the Adafruit device. When moving from off to on, the tone is higher than from on to off. 
+This program uses both buttons on the Adafruit Circuit Playground as well as the light and speaker. The light blinks at a rate determined by information given by the two buttons. The left button controls the mode. When pressed, it switches between increasing and decreasing mode. In increasing mode, if the right button is pressed, the light blinks faster. In decreasing mode, the opposite effect happens. There are 5 frequency levels for the blinking light: on, very slow, slow, fast, very fast, off. When the right button press causes the mode to loop back around (from "off" forward to "on" or "on" back to "off"), a tone sounds on the Adafruit device. When moving from off to on, the tone is higher than from on to off. 
 ## Installation
-This program is intended to be run in Arduino on an Adafruit Circuit Playground:
+This program is intended to be run in Arduino on the microcontroller:
 
 1.  Connect the Adafruit to a port on the computer
 
