@@ -1,5 +1,5 @@
 # Hangman
-This program simulates the word-guessing game hangman and is played by two players. The program gets a word from player 1 and letter guesses from player 2. There are checks in place throughout the program to prevent as many issues as possible such as not allowing special characters from either player, setting a minimum number of letters for the word, and dealing with spaces in the word as multiple words are allowed to be inputted by player 1 for more variety in gameplay.
+I wrote this program to get more comfortable with classes and using multiple files. This program simulates the word-guessing game hangman and is played by two players. The program gets a word from player 1 and letter guesses from player 2. There are checks in place throughout the program to prevent as many issues as possible such as not allowing special characters from either player, setting a minimum number of letters for the word, and dealing with spaces in the word as multiple words are allowed to be inputted by player 1 for more variety in gameplay.
 
 ## Installation
 ```bash
