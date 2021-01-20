@@ -3,3 +3,5 @@ Hi, my name is Rachel Nielsen. I started programming in high school in 2014 and 
 
 ## LinkedIn
 https://www.linkedin.com/in/rachel-nielsen-383050171/
+
+## More projects coming soon!
