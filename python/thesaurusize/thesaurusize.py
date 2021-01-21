@@ -5,7 +5,7 @@ from random import seed
 from random import randint
 import time
 
-def thesarusize(word):
+def thesaurusize(word):
       # open the website with the word as the address and write to file "test.txt"
       address = "https://www.thesaurus.com/browse/" + word + "?s=t"
       urllib.request.urlretrieve(address, "thesaurus_page.txt")
@@ -80,7 +80,7 @@ def find_replacements(paragraph):
                         while True:
                               # if it works, check if the case of the first letter needs to be raised
                               try:
-                                    the_word = thesarusize(c_word)
+                                    the_word = thesaurusize(c_word)
                                     case_word = ""
                                     if(found_capital == 1):
                                           for h in range(len(the_word)):
@@ -162,7 +162,7 @@ def main():
                   indiv_word = no_space_word
                   while True:
                         try:
-                              print("\"Synonym\": " + thesarusize(indiv_word))
+                              print("\"Synonym\": " + thesaurusize(indiv_word))
                               break
                         except urllib.error.HTTPError: 
                               print("No synonyms found")
