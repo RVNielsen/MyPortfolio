@@ -93,19 +93,49 @@ def find_replacements(paragraph):
                   c_word = c_word + paragraph_str[u]
             # if the current character is punctuation, remove space after the previous 
                   # word and add the punctuation to the new paragraph
-            if(paragraph_str[u] == '.' or paragraph_str[u] == ',' or paragraph_str[u] == '?' 
-                  or paragraph_str[u] == '!' or paragraph_str[u] == '"' or paragraph_str[u] == '\''
-                        or paragraph_str[u] == '-' or paragraph_str[u] == '/' or paragraph_str[u] == ':' 
-                              or paragraph_str[u] == '(' or paragraph_str[u] == ')'):
+            if(ord(paragraph_str[u]) >= 33 and ord(paragraph_str[u]) <= 47):
                   new_paragraph = new_paragraph[:-1] + paragraph_str[u]
       # completed going through original paragraph, so new paragraph is complete
+      my_file.close()
       return new_paragraph
 
 def main():
-      # paragraph = "para2.txt"
-      paragraph = input("Enter the name of a file: ")
-      print(find_replacements(paragraph))
-      # word = input("enter a word: ")
-      # print(thesarusize(word))
+      # try to open user inputted file and ask for another name if not available
+      mode = 'a'
+      while(mode != 'f' and mode != 'w'):
+            mode = input("Would you like to enter an entire file or just individual words? f / w: ")
+      if(mode == 'f'):
+            while True:
+                  try:
+                        file_name = input("Enter the name of a file: ")
+                        break
+                  except (IOError, EOFError):
+                        print("Try again, file not found")
+            num_loops = 100
+            while(num_loops > 10 or num_loops < 1):
+                  num_loops = int(input("How many times would you like to translate? "))
+            # pass the file name to the find_replacements file and get the result in new paragraph
+            new_paragraph = find_replacements(file_name)
+            # open the new file and write the result to it
+            file_name = "2" + file_name
+            new_file = open(file_name, "w")
+            new_file.write(new_paragraph)
+            new_file.close()
+            for n in range(num_loops - 1):
+                  new_paragraph = find_replacements(file_name)
+                  new_file = open(file_name, "w")
+                  new_file.write(new_paragraph)
+                  new_file.close()
+      elif(mode == 'w'):
+            indiv_word = 'a'
+            while(indiv_word != 'q'):
+                  indiv_word = input("Enter a word. (wite 'q' to quit): ")
+                  print("Your word: " + indiv_word)
+                  while True:
+                        try:
+                              print("\"Synonym\": " + thesarusize(indiv_word))
+                              break
+                        except urllib.error.HTTPError: 
+                              print("No synonyms found")
 
 main()
