@@ -5,3 +5,9 @@ I created this program to learn how to gather information from websites and to h
 ```
 python3 thesaurusize.py
 ```
+## Table of Contents
+thesaurusize.py - uses thesaurus.com to replace words
+
+paragraph.txt - example of original text file
+
+new_paragraph.txt - example of thesaurisized text file
