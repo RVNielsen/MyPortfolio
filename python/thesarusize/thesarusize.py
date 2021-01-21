@@ -34,13 +34,27 @@ def thesarusize(word):
                                           y = y + 4
                                           # create the synonym string and stop when anything other than a letter is reached
                                           for i in range(15):
-                                                if(ord(linestring[y + i]) <= 96 or ord(linestring[y + i]) >= 123): # and (linestring[y + i] != '%')
+                                                # stop at the end of the word
+                                                if(linestring[y + i] == "\""):
+                                                      # temporary synonym and counter for fixing spaces
+                                                      temp_syn = ""
+                                                      t = 0
+                                                      while(t < len(synonym)):
+                                                            if(synonym[t] == '%' and synonym[t + 1] == '2' and synonym[t + 2] == '0'):
+                                                                  temp_syn = temp_syn + ' '
+                                                                  t = t + 2
+                                                            else:
+                                                                  temp_syn = temp_syn + synonym[t]
+                                                            t = t + 1
+                                                      # change synonym to the version with correct spaces and return
+                                                      synonym = temp_syn
                                                       return synonym
                                                 synonym = synonym + linestring[y + i]
                                           break
                                     syn_num = syn_num + 1
                   syn_line = syn_line + 1
-      return "ERROR"
+      # if for some reason, the function hasn't already returned, display error
+      return "ERROR: can't find synonym"
 
 def find_replacements(paragraph):
       # open the file to be editing and turn into a string
@@ -104,38 +118,54 @@ def main():
       mode = 'a'
       while(mode != 'f' and mode != 'w'):
             mode = input("Would you like to enter an entire file or just individual words? f / w: ")
+      # file mode
       if(mode == 'f'):
             while True:
                   try:
+                        # pass the file name to the find_replacements file and get the result in new paragraph
                         file_name = input("Enter the name of a file: ")
+                        new_paragraph = find_replacements(file_name)
                         break
-                  except (IOError, EOFError):
+                  except FileNotFoundError:
                         print("Try again, file not found")
-            num_loops = 100
-            while(num_loops > 10 or num_loops < 1):
-                  num_loops = int(input("How many times would you like to translate? "))
-            # pass the file name to the find_replacements file and get the result in new paragraph
-            new_paragraph = find_replacements(file_name)
-            # open the new file and write the result to it
+            num_loops = 'a'
+            while(ord(num_loops) > 57 or ord(num_loops) < 49):
+                  num_loops = input("How many times would you like to translate? ")
+                  num_loops = num_loops[0]
+            print("Looping " + num_loops + " times")
+            # open the new file and write the result to it the first time
             file_name = "2" + file_name
             new_file = open(file_name, "w")
             new_file.write(new_paragraph)
             new_file.close()
-            for n in range(num_loops - 1):
-                  new_paragraph = find_replacements(file_name)
-                  new_file = open(file_name, "w")
-                  new_file.write(new_paragraph)
-                  new_file.close()
+            # if the user asked for more than 1 loop, keep going
+            if(int(num_loops) > 1):
+                  for n in range(int(num_loops) - 1):
+                        new_paragraph = find_replacements(file_name)
+                        new_file = open(file_name, "w")
+                        new_file.write(new_paragraph)
+                        new_file.close()
+      # individual word mode
       elif(mode == 'w'):
             indiv_word = 'a'
+            # get user inputted words and find synonyms until they quit
             while(indiv_word != 'q'):
                   indiv_word = input("Enter a word. (wite 'q' to quit): ")
+                  # replace any spaces with %20 for the website address
+                  no_space_word = ""
+                  for h in range(len(indiv_word)):
+                        if(indiv_word[h] == ' '):
+                              no_space_word = no_space_word + "%20"
+                        else:
+                              no_space_word = no_space_word + indiv_word[h]
                   print("Your word: " + indiv_word)
+                  indiv_word = no_space_word
                   while True:
                         try:
                               print("\"Synonym\": " + thesarusize(indiv_word))
                               break
                         except urllib.error.HTTPError: 
                               print("No synonyms found")
+                              break
 
 main()
