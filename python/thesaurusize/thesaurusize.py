@@ -93,11 +93,11 @@ def try_thes(new_paragraph, c_word, found_capital):
 def end_of_word(c_word, found_capital, new_paragraph):
       # if the word is at least 4 letters long, start replacement process
       if(len(c_word) > 3):
-            # # try to search the thesarus for the word
+            # try to search the thesarus for the word
             new_paragraph = try_thes(new_paragraph, c_word, found_capital)
       else:
             # reset the capital flag and add the current word since it is not
-                  # long enough to be replaced
+            #     long enough to be replaced
             new_paragraph += c_word + " " # todo
       return new_paragraph
 
@@ -120,7 +120,8 @@ def find_replacements(paragraph):
                   found_capital = 1
             # if the current character is not a letter, assume end of the word
             if((ord(paragraph_str[u]) < 97 or ord(paragraph_str[u]) > 122) and 
-                  (ord(paragraph_str[u]) < 65 or ord(paragraph_str[u]) > 90) and (ord(paragraph_str[u]) < 48 or ord(paragraph_str[u]) > 57)):
+                  (ord(paragraph_str[u]) < 65 or ord(paragraph_str[u]) > 90) and 
+                        (ord(paragraph_str[u]) < 48 or ord(paragraph_str[u]) > 57)):
                   # if the word is at least 4 letters long, start replacement process
                   new_paragraph = end_of_word(c_word, found_capital, new_paragraph)
                   # reset current word and capital counter
@@ -136,7 +137,6 @@ def find_replacements(paragraph):
       # completed going through original paragraph, so new paragraph is complete
       my_file.close()
       return new_paragraph
-
 
 def find_indiv_syn(indiv_word):
       while True:
@@ -158,13 +158,41 @@ def space_replace(indiv_word):
       return no_space_word
 
 def word_mode():
-      indiv_word = 'a'
       # get user inputted words and find synonyms until they quit
+      indiv_word = 'a'
       while(indiv_word != 'q'):
             indiv_word = input("Enter a word. (wite 'q' to quit): ")
             print("Your word: " + indiv_word)
             indiv_word = space_replace(indiv_word)
-            return find_indiv_syn(indiv_word)
+            print(find_indiv_syn(indiv_word))
+
+def write_to_file(file_name, range_val):
+      for n in range(range_val):
+            new_paragraph = find_replacements(file_name)
+            new_file = open(file_name, "w")
+            new_file.write(new_paragraph)
+            new_file.close()
+
+def file_mode():
+      while True:
+            try:
+                  # pass the file name to the find_replacements file and get the result in new paragraph
+                  file_name = input("Enter the name of a file: ")
+                  break
+            except FileNotFoundError:
+                  print("Try again, file not found")
+      num_loops = 0
+      while(int(num_loops) < 1 or int(num_loops) > 9):
+            num_loops = input("How many times would you like to thesaurusize the file? (1 - 9): ")
+            num_loops = num_loops[0]
+      if(int(num_loops) == 1):
+            print("Running " + num_loops + " time")
+      else:
+            print("Running " + num_loops + " times")
+      # open the new file and write the result to it the first time
+      file_name = "new_" + file_name
+      print("Check " + file_name + " for thesaurisized result")
+      write_to_file(file_name, int(num_loops))
 
 def main():
       # try to open user inputted file and ask for another name if not available
@@ -173,33 +201,8 @@ def main():
             mode = input("Would you like to enter an entire file or just individual words? f / w: ")
       # file mode
       if(mode == 'f'):
-            while True:
-                  try:
-                        # pass the file name to the find_replacements file and get the result in new paragraph
-                        file_name = input("Enter the name of a file: ")
-                        new_paragraph = find_replacements(file_name)
-                        break
-                  except FileNotFoundError:
-                        print("Try again, file not found")
-            num_loops = 'a'
-            while(ord(num_loops) > 57 or ord(num_loops) < 49):
-                  num_loops = input("How many times would you like to translate? ")
-                  num_loops = num_loops[0]
-            print("Looping " + num_loops + " times")
-            # open the new file and write the result to it the first time
-            file_name = "new_" + file_name
-            new_file = open(file_name, "w")
-            new_file.write(new_paragraph)
-            new_file.close()
-            # if the user asked for more than 1 loop, keep going
-            if(int(num_loops) > 1):
-                  for n in range(int(num_loops) - 1):
-                        new_paragraph = find_replacements(file_name)
-                        new_file = open(file_name, "w")
-                        new_file.write(new_paragraph)
-                        new_file.close()
-      # individual word mode
+            file_mode()
       elif(mode == 'w'):
-            print(word_mode())
+            word_mode()
 
 main()
