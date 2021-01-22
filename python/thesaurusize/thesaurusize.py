@@ -5,6 +5,8 @@ from random import seed
 from random import randint
 import time
 
+# ---------- word mode ----------
+
 def fix_spaces(synonym):
       # temporary synonym and counter for fixing spaces
       temp_syn = ""
@@ -26,7 +28,7 @@ def get_syn(linestring, y, synonym):
       while True:
             # stop at the end of the word
             if(linestring[y + i] == "\""):
-                  return fix_spaces(synonym)
+                  return fix_spaces(synonym) # ----- to fix_spaces
             synonym = synonym + linestring[y + i]
             i += 1
 
@@ -38,7 +40,7 @@ def find_browse(linestring, syn_num):
             if(linestring[y] == 'w' and linestring[y + 1] == 's' and linestring[y + 2] == 'e'):
                   if(syn_num == rand_num):
                         y += 4
-                        return get_syn(linestring, y, synonym)
+                        return get_syn(linestring, y, synonym) # ----- to get_syn
                   syn_num += 1
 
 def thesaurusize(word):
@@ -59,10 +61,47 @@ def thesaurusize(word):
             for line in f:
                   # when the line with the synonyms is reached, index through the line as a string
                   if(syn_line == 136):
-                        return find_browse(str(line), syn_num)
+                        return find_browse(str(line), syn_num) # ----- to find_browse
                   syn_line += 1
       # if for some reason, the function hasn't already returned, display error
       return "---ERROR: can't find synonym---"
+
+def find_indiv_syn(indiv_word):
+      while True:
+            try:
+                  syn = str(thesaurusize(indiv_word)) # ----- to thesaurusize
+                  if(syn == "None"):
+                        return("No synonyms found")
+                  else:
+                        return("\"Synonym\": " + syn)
+                  break
+            except urllib.error.HTTPError: 
+                  if(indiv_word != 'q'):
+                        return("No synonyms found")
+                  break
+
+def space_replace(indiv_word):
+      # replace any spaces with %20 for the website address
+      no_space_word = ""
+      for h in range(len(indiv_word)):
+            if(indiv_word[h] == ' '):
+                  no_space_word += "%20"
+            else:
+                  no_space_word += indiv_word[h]
+      return no_space_word
+
+def word_mode():
+      # get user inputted words and find synonyms until they quit
+      indiv_word = 'a'
+      while(indiv_word != 'q'):
+            indiv_word = input("Enter a word. (write 'q' to quit): ")
+            print("Your word: " + indiv_word)
+            indiv_word = space_replace(indiv_word) # ----- to space_replace
+            print(find_indiv_syn(indiv_word)) # ----- to find_indiv_syn
+
+# ^---------- word mode ----------^
+
+# ---------- file mode ----------
 
 def fix_caps(found_capital, the_word):
       case_word = ""
@@ -78,7 +117,7 @@ def try_thes(new_paragraph, c_word, found_capital):
             try:
                   the_word = thesaurusize(c_word)
                   if(found_capital == 1):
-                        the_word = fix_caps(found_capital, the_word)
+                        the_word = fix_caps(found_capital, the_word) # ----- to fix_caps
                         found_capital = 0
                   # add the new word to the new paragraph
                   new_paragraph += the_word + " "
@@ -91,10 +130,11 @@ def try_thes(new_paragraph, c_word, found_capital):
       return new_paragraph
 
 def end_of_word(c_word, found_capital, new_paragraph):
-      # if the word is at least 4 letters long, start replacement process
-      if(len(c_word) > 3):
+      # if the word is at least the minimum number of letters long, start replacement process
+      min_word_len = 4
+      if(len(c_word) >= min_word_len):
             # try to search the thesarus for the word
-            new_paragraph = try_thes(new_paragraph, c_word, found_capital)
+            new_paragraph = try_thes(new_paragraph, c_word, found_capital) # ----- to try_thes
       else:
             # reset the capital flag and add the current word since it is not
             #     long enough to be replaced
@@ -123,7 +163,7 @@ def find_replacements(paragraph):
                   (ord(paragraph_str[u]) < 65 or ord(paragraph_str[u]) > 90) and 
                         (ord(paragraph_str[u]) < 48 or ord(paragraph_str[u]) > 57)):
                   # if the word is at least 4 letters long, start replacement process
-                  new_paragraph = end_of_word(c_word, found_capital, new_paragraph)
+                  new_paragraph = end_of_word(c_word, found_capital, new_paragraph) # ----- to end_of_word
                   # reset current word and capital counter
                   c_word = ""
                   found_capital = 0
@@ -138,37 +178,9 @@ def find_replacements(paragraph):
       my_file.close()
       return new_paragraph
 
-def find_indiv_syn(indiv_word):
-      while True:
-            try:
-                  return("\"Synonym\": " + thesaurusize(indiv_word))
-                  break
-            except urllib.error.HTTPError: 
-                  return("No synonyms found")
-                  break
-
-def space_replace(indiv_word):
-      # replace any spaces with %20 for the website address
-      no_space_word = ""
-      for h in range(len(indiv_word)):
-            if(indiv_word[h] == ' '):
-                  no_space_word += "%20"
-            else:
-                  no_space_word += indiv_word[h]
-      return no_space_word
-
-def word_mode():
-      # get user inputted words and find synonyms until they quit
-      indiv_word = 'a'
-      while(indiv_word != 'q'):
-            indiv_word = input("Enter a word. (wite 'q' to quit): ")
-            print("Your word: " + indiv_word)
-            indiv_word = space_replace(indiv_word)
-            print(find_indiv_syn(indiv_word))
-
 def write_to_file(file_name, range_val):
       for n in range(range_val):
-            new_paragraph = find_replacements(file_name)
+            new_paragraph = find_replacements(file_name) # ----- to find_replacements
             new_file = open(file_name, "w")
             new_file.write(new_paragraph)
             new_file.close()
@@ -176,7 +188,7 @@ def write_to_file(file_name, range_val):
 def file_mode():
       while True:
             try:
-                  # pass the file name to the find_replacements file and get the result in new paragraph
+                  # pass the file name to the find replacements file and get the result in new paragraph
                   file_name = input("Enter the name of a file: ")
                   break
             except FileNotFoundError:
@@ -191,8 +203,10 @@ def file_mode():
             print("Running " + num_loops + " times")
       # open the new file and write the result to it the first time
       file_name = "new_" + file_name
+      write_to_file(file_name, int(num_loops)) # ----- to write_to_file
       print("Check " + file_name + " for thesaurisized result")
-      write_to_file(file_name, int(num_loops))
+
+# ^---------- file mode ----------^
 
 def main():
       # try to open user inputted file and ask for another name if not available
@@ -201,8 +215,8 @@ def main():
             mode = input("Would you like to enter an entire file or just individual words? f / w: ")
       # file mode
       if(mode == 'f'):
-            file_mode()
+            file_mode() # ----- to file_mode
       elif(mode == 'w'):
-            word_mode()
+            word_mode() # ----- to word_mode
 
 main()
