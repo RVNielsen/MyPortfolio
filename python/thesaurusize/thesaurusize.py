@@ -31,9 +31,10 @@ def thesaurusize(word):
                               # search for the end of the word "browse" and when found, check if this is the right synonym to use
                               if(linestring[y] == 'w' and linestring[y + 1] == 's' and linestring[y + 2] == 'e'):
                                     if(syn_num == rand_num):
-                                          y = y + 4
+                                          y += 4
                                           # create the synonym string and stop when anything other than a letter is reached
-                                          for i in range(15):
+                                          i = 0
+                                          while True:
                                                 # stop at the end of the word
                                                 if(linestring[y + i] == "\""):
                                                       # temporary synonym and counter for fixing spaces
@@ -41,20 +42,21 @@ def thesaurusize(word):
                                                       t = 0
                                                       while(t < len(synonym)):
                                                             if(synonym[t] == '%' and synonym[t + 1] == '2' and synonym[t + 2] == '0'):
-                                                                  temp_syn = temp_syn + ' '
-                                                                  t = t + 2
+                                                                  temp_syn += ' '
+                                                                  t += 2
                                                             else:
                                                                   temp_syn = temp_syn + synonym[t]
-                                                            t = t + 1
+                                                            t += 1
                                                       # change synonym to the version with correct spaces and return
                                                       synonym = temp_syn
                                                       return synonym
                                                 synonym = synonym + linestring[y + i]
+                                                i += 1
                                           break
-                                    syn_num = syn_num + 1
-                  syn_line = syn_line + 1
+                                    syn_num += 1
+                  syn_line += 1
       # if for some reason, the function hasn't already returned, display error
-      return "ERROR: can't find synonym"
+      return "---ERROR: can't find synonym---"
 
 def find_replacements(paragraph):
       # open the file to be editing and turn into a string
@@ -84,27 +86,27 @@ def find_replacements(paragraph):
                                     case_word = ""
                                     if(found_capital == 1):
                                           for h in range(len(the_word)):
-                                                case_word = case_word + chr(ord(the_word[h]) - 32 * found_capital)
+                                                case_word += chr(ord(the_word[h]) - 32 * found_capital)
                                                 found_capital = 0
                                           the_word = case_word
                                     # add the new word to the new paragraph
-                                    new_paragraph = new_paragraph + the_word + " "
+                                    new_paragraph += the_word + " "
                                     break
                               # if the thesarus couldn't find the word, leave it as is
                               except urllib.error.HTTPError:
                                     # add the original word to the new paragraph
-                                    new_paragraph = new_paragraph + c_word + " "
+                                    new_paragraph += c_word + " " # todo
                                     break
                   else:
                         # reset the capital flag and add the current word since it is not
                               # long enough to be replaced
                         found_capital = 0
-                        new_paragraph = new_paragraph + c_word + " "
+                        new_paragraph += c_word + " " # todo
                   # reset current word
                   c_word = ""
             else:
                   # add the current letter to the current word
-                  c_word = c_word + paragraph_str[u]
+                  c_word += paragraph_str[u]
             # if the current character is punctuation, remove space after the previous 
                   # word and add the punctuation to the new paragraph
             if(ord(paragraph_str[u]) >= 33 and ord(paragraph_str[u]) <= 47):
@@ -155,9 +157,9 @@ def main():
                   no_space_word = ""
                   for h in range(len(indiv_word)):
                         if(indiv_word[h] == ' '):
-                              no_space_word = no_space_word + "%20"
+                              no_space_word += "%20"
                         else:
-                              no_space_word = no_space_word + indiv_word[h]
+                              no_space_word += indiv_word[h]
                   print("Your word: " + indiv_word)
                   indiv_word = no_space_word
                   while True:
