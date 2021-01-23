@@ -244,7 +244,7 @@ def file_mode(which_syn):
 
 # prompt user for mode 
 def main():
-      # get acceptable mode and synonym choice from user
+      # get mode from user
       mode = 'a'
       while(mode != 'f' and mode != 'w'):
             mode = input("Would you like to enter an entire file or just individual words?\n(\"f\" for file / \"w\" for word): ")
