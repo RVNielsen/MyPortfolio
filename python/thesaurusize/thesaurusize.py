@@ -20,16 +20,16 @@ def fix_spaces(synonym):
                   temp_syn = temp_syn + synonym[t]
             t += 1
       # change synonym to the version with correct spaces and return
-      synonym = temp_syn
-      return synonym
+      return temp_syn
 
 # get the number of synonyms available for the word
 def syn_num_max(linestring):
       max_num = 0
       for y in range(len(linestring)):
-            # search for the end of the phrase "opposites of " to ensure that only synonyms are included 
+            # "opposites of" always precedes the antonyms section, so stop once that phrase is found
             if(linestring[y] == 'e' and linestring[y + 1] == 's' and linestring[y + 2] == ' ' and linestring[y + 3] == 'o' and linestring[y + 4] == 'f'):
                   break
+            # if not at the anyonyms section, keep looking
             if(linestring[y] == 'w' and linestring[y + 1] == 's' and linestring[y + 2] == 'e'):
                   y += 4
                   max_num += 1
@@ -39,7 +39,7 @@ def syn_num_max(linestring):
 def get_syn(linestring, y, synonym):
       i = 0
       while True:
-            # stop at the end of the word
+            # stop at the end of the word when quotes start
             if(linestring[y + i] == "\""):
                   return fix_spaces(synonym) # ----- to fix_spaces
             synonym = synonym + linestring[y + i]
@@ -47,23 +47,25 @@ def get_syn(linestring, y, synonym):
 
 # find the synonyms on the page
 def find_browse(linestring, syn_num, which_syn):
+      # did the user want the 1 synonym on the page or a random one
       if(str(which_syn) == '1'):
+            # the word itself is the first "synonym" on the page, so start at 2
             rand_num = 2
       elif(str(which_syn) == 'r'):
             max_num = syn_num_max(linestring) # ----- to syn_num_max
             rand_num = randint(2, max_num)
       for y in range(len(linestring)):
             synonym = ""
-            # search for the end of the word "browse" and when found, check if this is the right synonym to use
+            # "browse" always precedes the synonyms
             if(linestring[y] == 'w' and linestring[y + 1] == 's' and linestring[y + 2] == 'e'):
                   if(syn_num == rand_num):
                         y += 4
                         return get_syn(linestring, y, synonym) # ----- to get_syn
                   syn_num += 1
 
-# transfer the page's code to the file "thesaurus_page.txt"
+# transfer the page's code to a file and find the line with the synonyms
 def thesaurusize(word, which_syn):
-      # open the website with the word as the address and write to file "test.txt"
+      # open the website with the word in the address and write to the file "thesaurus_page.txt"
       address = "https://www.thesaurus.com/browse/" + word + "?s=t"
       urllib.request.urlretrieve(address, "thesaurus_page.txt")
 
@@ -78,7 +80,7 @@ def thesaurusize(word, which_syn):
       # open the file with the thesaurus page and go through each line
       with open('thesaurus_page.txt') as f:
             for line in f:
-                  # when the line with the synonyms is reached, index through the line as a string
+                  # line 136 always includes the synonyms, so only search that one
                   if(syn_line == 136):
                         return find_browse(str(line), syn_num, which_syn) # ----- to find_browse
                   syn_line += 1
@@ -135,21 +137,19 @@ def fix_caps(found_capital, the_word):
 
 # send words off to be thesaurusized 
 def try_thes(new_paragraph, c_word, found_capital, which_syn):
-      # try to search the thesarus for the word
       while True:
-            # if it works, check if the case of the first letter needs to be raised
             try:
+                  # get a new word and fix capitalization if necessary
                   the_word = thesaurusize(c_word, which_syn)
                   if(found_capital == 1):
                         the_word = fix_caps(found_capital, the_word) # ----- to fix_caps
                         found_capital = 0
-                  # add the new word to the new paragraph
                   new_paragraph += the_word + " "
                   break
             # if the thesarus couldn't find the word, leave it as is
             except urllib.error.HTTPError:
                   # add the original word to the new paragraph
-                  new_paragraph += c_word + " " # todo
+                  new_paragraph += c_word + " " 
                   break
       return new_paragraph
 
@@ -179,7 +179,6 @@ def find_replacements(paragraph, which_syn):
       # should the current word be capitalized
       found_capital = 0
 
-      # for the entire paragraph
       for u in range(len(paragraph_str)):
             # if there's a capital letter in a word, flag it
             if((ord(paragraph_str[u]) >= 65 and ord(paragraph_str[u]) <= 90)):
@@ -206,6 +205,7 @@ def find_replacements(paragraph, which_syn):
 
 # write the thesaurusized text to the new file
 def write_to_file(file_name, range_val, which_syn):
+      # progress status for user as the file is thesaurusized
       for n in range(range_val):
             if(n == 0):
                   print("...Running 1st thesaurusize...")
@@ -226,34 +226,34 @@ def write_to_file(file_name, range_val, which_syn):
 def file_mode(which_syn):
       while True:
             try:
-                  # pass the file name to the find replacements file and get the result in new paragraph
+                  # get valid file name and send file off to write_to_file with num_loops
                   file_name = input("Enter the name of a file: ")
+                  num_loops = 0
+                  while(int(num_loops) < 1 or int(num_loops) > 9):
+                        num_loops = input("How many times would you like to thesaurusize the file? (1 - 9): ")
+                        num_loops = num_loops[0]
+                  
+                  write_to_file(file_name, int(num_loops), which_syn) # ----- to write_to_file
                   break
             except FileNotFoundError:
                   print("Try again, file not found")
-      num_loops = 0
-      while(int(num_loops) < 1 or int(num_loops) > 9):
-            num_loops = input("How many times would you like to thesaurusize the file? (1 - 9): ")
-            num_loops = num_loops[0]
-      
-      # open the new file and write the result to it the first time
-      write_to_file(file_name, int(num_loops), which_syn) # ----- to write_to_file
+      # tell user what the new file is called 
       print("Check " + file_name + " for thesaurisized result")
 
 # ^---------- file mode ----------^
 
 # prompt user for mode 
 def main():
-      # try to open user inputted file and ask for another name if not available
+      # get acceptable mode and synonym choice from user
       mode = 'a'
       while(mode != 'f' and mode != 'w'):
             mode = input("Would you like to enter an entire file or just individual words?\n(\"f\" for file / \"w\" for word): ")
             mode = mode[0]
+      # get synonym preference from user and pass all the way to find_browse
       which_syn = ""
       while(str(which_syn) != '1' and str(which_syn) != 'r'):
             which_syn = input("Would you like to get the most relevant synonym (first one) or a random one?\n(\"1\" for first / \"r\" for random) ")
             which_syn = which_syn[0]
-      # file mode
       if(mode == 'f'):
             file_mode(which_syn) # ----- to file_mode
       elif(mode == 'w'):
