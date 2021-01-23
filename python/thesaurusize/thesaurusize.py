@@ -22,16 +22,6 @@ def fix_spaces(synonym):
       synonym = temp_syn
       return synonym
 
-def get_syn(linestring, y, synonym):
-      # create the synonym string and stop when quotes are reached
-      i = 0
-      while True:
-            # stop at the end of the word
-            if(linestring[y + i] == "\""):
-                  return fix_spaces(synonym) # ----- to fix_spaces
-            synonym = synonym + linestring[y + i]
-            i += 1
-
 def syn_num_max(linestring):
       max_num = 0
       for y in range(len(linestring)):
@@ -43,9 +33,22 @@ def syn_num_max(linestring):
                   max_num += 1
       return max_num
 
-def find_browse(linestring, syn_num):
-      max_num = syn_num_max(linestring)
-      rand_num = randint(2, max_num)
+def get_syn(linestring, y, synonym):
+      # create the synonym string and stop when quotes are reached
+      i = 0
+      while True:
+            # stop at the end of the word
+            if(linestring[y + i] == "\""):
+                  return fix_spaces(synonym) # ----- to fix_spaces
+            synonym = synonym + linestring[y + i]
+            i += 1
+
+def find_browse(linestring, syn_num, which_syn):
+      if(str(which_syn) == '1'):
+            rand_num = 2
+      elif(str(which_syn) == 'r'):
+            max_num = syn_num_max(linestring) # ----- to syn_num_max
+            rand_num = randint(2, max_num)
       for y in range(len(linestring)):
             synonym = ""
             # search for the end of the word "browse" and when found, check if this is the right synonym to use
@@ -55,7 +58,7 @@ def find_browse(linestring, syn_num):
                         return get_syn(linestring, y, synonym) # ----- to get_syn
                   syn_num += 1
 
-def thesaurusize(word):
+def thesaurusize(word, which_syn):
       # open the website with the word as the address and write to file "test.txt"
       address = "https://www.thesaurus.com/browse/" + word + "?s=t"
       urllib.request.urlretrieve(address, "thesaurus_page.txt")
@@ -73,15 +76,15 @@ def thesaurusize(word):
             for line in f:
                   # when the line with the synonyms is reached, index through the line as a string
                   if(syn_line == 136):
-                        return find_browse(str(line), syn_num) # ----- to find_browse
+                        return find_browse(str(line), syn_num, which_syn) # ----- to find_browse
                   syn_line += 1
       # if for some reason, the function hasn't already returned, display error
       return "---ERROR: can't find synonym---"
 
-def find_indiv_syn(indiv_word):
+def find_indiv_syn(indiv_word, which_syn):
       while True:
             try:
-                  syn = str(thesaurusize(indiv_word)) # ----- to thesaurusize
+                  syn = str(thesaurusize(indiv_word, which_syn)) # ----- to thesaurusize
                   if(syn == "None"):
                         return("No synonyms found")
                   else:
@@ -102,14 +105,14 @@ def space_replace(indiv_word):
                   no_space_word += indiv_word[h]
       return no_space_word
 
-def word_mode():
+def word_mode(which_syn):
       # get user inputted words and find synonyms until they quit
       indiv_word = 'a'
       while(indiv_word != 'q'):
             indiv_word = input("Enter a word. (write 'q' to quit): ")
             print("Your word: " + indiv_word)
             indiv_word = space_replace(indiv_word) # ----- to space_replace
-            print(find_indiv_syn(indiv_word)) # ----- to find_indiv_syn
+            print(find_indiv_syn(indiv_word, which_syn)) # ----- to find_indiv_syn
 
 # ^---------- word mode ----------^
 
@@ -122,12 +125,12 @@ def fix_caps(found_capital, the_word):
             found_capital = 0
       return case_word
 
-def try_thes(new_paragraph, c_word, found_capital):
+def try_thes(new_paragraph, c_word, found_capital, which_syn):
       # try to search the thesarus for the word
       while True:
             # if it works, check if the case of the first letter needs to be raised
             try:
-                  the_word = thesaurusize(c_word)
+                  the_word = thesaurusize(c_word, which_syn)
                   if(found_capital == 1):
                         the_word = fix_caps(found_capital, the_word) # ----- to fix_caps
                         found_capital = 0
@@ -141,19 +144,19 @@ def try_thes(new_paragraph, c_word, found_capital):
                   break
       return new_paragraph
 
-def end_of_word(c_word, found_capital, new_paragraph):
+def end_of_word(c_word, found_capital, new_paragraph, which_syn):
       # if the word is at least the minimum number of letters long, start replacement process
       min_word_len = 4
       if(len(c_word) >= min_word_len):
             # try to search the thesarus for the word
-            new_paragraph = try_thes(new_paragraph, c_word, found_capital) # ----- to try_thes
+            new_paragraph = try_thes(new_paragraph, c_word, found_capital, which_syn) # ----- to try_thes
       else:
             # reset the capital flag and add the current word since it is not
             #     long enough to be replaced
             new_paragraph += c_word + " " # todo
       return new_paragraph
 
-def find_replacements(paragraph):
+def find_replacements(paragraph, which_syn):
       # open the file to be editing and turn into a string
       my_file = open(paragraph, "r")
       paragraph_str = my_file.read()
@@ -175,7 +178,7 @@ def find_replacements(paragraph):
                   (ord(paragraph_str[u]) < 65 or ord(paragraph_str[u]) > 90) and 
                         (ord(paragraph_str[u]) < 48 or ord(paragraph_str[u]) > 57)):
                   # if the word is at least 4 letters long, start replacement process
-                  new_paragraph = end_of_word(c_word, found_capital, new_paragraph) # ----- to end_of_word
+                  new_paragraph = end_of_word(c_word, found_capital, new_paragraph, which_syn) # ----- to end_of_word
                   # reset current word and capital counter
                   c_word = ""
                   found_capital = 0
@@ -190,14 +193,15 @@ def find_replacements(paragraph):
       my_file.close()
       return new_paragraph
 
-def write_to_file(file_name, range_val):
+def write_to_file(file_name, range_val, which_syn):
       for n in range(range_val):
-            new_paragraph = find_replacements(file_name) # ----- to find_replacements
+            new_paragraph = find_replacements(file_name, which_syn) # ----- to find_replacements
+            file_name = "new_" + file_name
             new_file = open(file_name, "w")
             new_file.write(new_paragraph)
             new_file.close()
 
-def file_mode():
+def file_mode(which_syn):
       while True:
             try:
                   # pass the file name to the find replacements file and get the result in new paragraph
@@ -214,8 +218,7 @@ def file_mode():
       else:
             print("Running " + num_loops + " times")
       # open the new file and write the result to it the first time
-      file_name = "new_" + file_name
-      write_to_file(file_name, int(num_loops)) # ----- to write_to_file
+      write_to_file(file_name, int(num_loops), which_syn) # ----- to write_to_file
       print("Check " + file_name + " for thesaurisized result")
 
 # ^---------- file mode ----------^
@@ -225,10 +228,15 @@ def main():
       mode = 'a'
       while(mode != 'f' and mode != 'w'):
             mode = input("Would you like to enter an entire file or just individual words?\n(\"f\" for file / \"w\" for word): ")
+            mode = mode[0]
+      which_syn = ""
+      while(str(which_syn) != '1' and str(which_syn) != 'r'):
+            which_syn = input("Would you like to get the most relevant synonym (first one) or a random one?\n(\"1\" for first / \"r\" for random) ")
+            which_syn = which_syn[0]
       # file mode
       if(mode == 'f'):
-            file_mode() # ----- to file_mode
+            file_mode(which_syn) # ----- to file_mode
       elif(mode == 'w'):
-            word_mode() # ----- to word_mode
+            word_mode(which_syn) # ----- to word_mode
 
 main()
