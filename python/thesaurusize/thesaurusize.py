@@ -32,8 +32,20 @@ def get_syn(linestring, y, synonym):
             synonym = synonym + linestring[y + i]
             i += 1
 
+def syn_num_max(linestring):
+      max_num = 0
+      for y in range(len(linestring)):
+            # search for the end of the phrase "opposites of " to ensure that only synonyms are included 
+            if(linestring[y] == 'e' and linestring[y + 1] == 's' and linestring[y + 2] == ' ' and linestring[y + 3] == 'o' and linestring[y + 4] == 'f'):
+                  break
+            if(linestring[y] == 'w' and linestring[y + 1] == 's' and linestring[y + 2] == 'e'):
+                  y += 4
+                  max_num += 1
+      return max_num
+
 def find_browse(linestring, syn_num):
-      rand_num = randint(2, 5)
+      max_num = syn_num_max(linestring)
+      rand_num = randint(2, max_num)
       for y in range(len(linestring)):
             synonym = ""
             # search for the end of the word "browse" and when found, check if this is the right synonym to use
@@ -212,7 +224,7 @@ def main():
       # try to open user inputted file and ask for another name if not available
       mode = 'a'
       while(mode != 'f' and mode != 'w'):
-            mode = input("Would you like to enter an entire file or just individual words? f / w: ")
+            mode = input("Would you like to enter an entire file or just individual words?\n(\"f\" for file / \"w\" for word): ")
       # file mode
       if(mode == 'f'):
             file_mode() # ----- to file_mode
