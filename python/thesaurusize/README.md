@@ -11,3 +11,15 @@ thesaurusize.py - uses thesaurus.com to replace words
 paragraph.txt - example of original text file
 
 new_paragraph.txt - example of thesaurisized text file
+
+## Usage
+Example 1: 
+Before
+```
+As everyone is aware, we are in the midst of a pandemic.  Classes are not running as "normal".  This class likewise.  We will begin the semester in-person.  But IF circumstances require it, we will move all instruction to on-line presentation. You will have ample notification.
+```
+
+After
+```
+As anybody is appreciative, we are in the depths of a broad.  Degree are not constant as "regular".  Previously mentioned dashing besides.  We desire create the period in-character.  But IF capital crave it, we character act all information to on-edge demonstration. You decision accept bountiful notice.
+```
