@@ -7,9 +7,9 @@ bash hangman.sh
 ```
 
 ## Table of Contents
-example1.md - Both players play the game well
+example1.md - both players play the game well
 
-example2.md - Both players try to break the game
+example2.md - both players try to break the game
 
 hangman.sh - bash script for running all the cpp files together
 
