@@ -32,40 +32,48 @@ import javafx.geometry.HPos;
 
 public class Project1 extends Application
 {
+      final int NUM = 5;
+      Button[] lButton = new Button[NUM];
+      Button[] qButton = new Button[NUM];
+      TextField[] tField = new TextField[NUM];
+      String[] guess = new String[NUM];
+      String[] ans = new String[NUM];
+
+      Text[] text = new Text[NUM];
       BorderPane root = new BorderPane();
+      GridPane pane0 = new GridPane();
       GridPane pane1 = new GridPane();
-      GridPane pane2 = new GridPane();
       GridPane pane3 = new GridPane();
-      GridPane pane4 = new GridPane();
-      GridPane fPane = new GridPane();
-      Text text1, text2, text3;
-      Button aButton, bButton, button1, button2, button3;
+      
+      GridPane lPane = new GridPane();
+      GridPane qPane = new GridPane();
+
       Scene scene;
       Stage stage;
-      TextField tField1, tField2;
-      String str1, str2;
-      String ans1, ans2;
 
       @Override
       public void start(Stage stage)
       {
-            fPane = leftSide();
-            pane4 = centerPage();
+            lPane = leftSide();
+            qPane = centerPage();
             setup();
+
+            // make a window and configure it
             Scene scene = new Scene(root, 700, 600);
             stage.setTitle("BorderPaneDemo");
             stage.setScene(scene);
             stage.show();
       }
 
+      // configure the root pane
       public void setup()
       {
+            root.setStyle("-fx-alignment: center");
             root.setStyle("-fx-background-color: GRAY");
             root.setTop(new CustomPane("Top"));
-            root.setRight(new CustomPane("Right"));
             root.setBottom(new CustomPane("Bottom"));
-            root.setLeft(fPane);
-            root.setCenter(pane4);
+            root.setLeft(lPane);
+            root.setCenter(qPane);
       }
 
       class CustomPane extends StackPane
@@ -74,90 +82,83 @@ public class Project1 extends Application
             {
                   getChildren().add(new Label(title));
                   setStyle("-fx-border-color: GREEN");
-                  setPadding(new Insets(11.5, 12.5, 13.5, 14.5));
+                  setPadding(new Insets(15, 15, 15, 15));
             }
       }
       
       public GridPane leftSide()
       {
-            button1 = new Button("Button 1");
-            button2 = new Button("Button 2");
-            button3 = new Button("Button 3");
-
-            fPane.add(button1, 0, 0);
-            fPane.add(button2, 0, 1);
-            fPane.add(button3, 0, 2);
-
-            button1.setOnAction(ae->
+            for(int a = 0; a < NUM; a++)
             {
-                  pane4.getChildren().clear();
-                  pane4.getChildren().add(pane1);
-            });
-            button2.setOnAction(ae->
+                  lButton[a] = new Button("lButton " + a);
+                  lPane.add(lButton[a], 0, a);
+                  if(a > 0)
+                  {
+                        lButton[a].setVisible(false);
+                  }
+            }
+
+            lButton[0].setOnAction(ae->
             {
-                  pane4.getChildren().clear();
-                  pane4.getChildren().add(pane2);
+                  qPane.getChildren().clear();
+                  qPane.getChildren().add(pane0);
             });
-            button3.setOnAction(ae->
+            lButton[1].setOnAction(ae->
             {
-                  pane4.getChildren().clear();
-                  pane4.getChildren().add(pane3);
+                  qPane.getChildren().clear();
+                  qPane.getChildren().add(pane1);
+            });
+            lButton[2].setOnAction(ae->
+            {
+                  qPane.getChildren().clear();
+                  qPane.getChildren().add(pane3);
             });
 
-            button2.setVisible(false);
-            button3.setVisible(false);
+            return lPane;
+      }
 
-            return fPane;
+      public GridPane pageSetup(GridPane gPane, Integer i)
+      {
+            gPane.add(text[i], 0, 0);
+            gPane.add(qButton[i], 0, 1);
+            gPane.add(tField[i], 0, 2);
+            return gPane;
+      }
+
+      public void check(int n)
+      {
+            guess[n] = new String(tField[n].getText());
+            if(guess[n].equals(ans[n]))
+            {
+                  lButton[n + 1].setVisible(true);
+            }
       }
 
       public GridPane centerPage()
       {
-            ans1 = new String("hi");
-            ans2 = new String("hello");
-            aButton = new Button("aButton");
-            bButton = new Button("bButton");
-            tField1 = new TextField("");
-            tField2 = new TextField("");
-            tField1.setFont(Font.font("Courier New", FontWeight.BOLD, FontPosture.REGULAR, 50));
-            tField2.setFont(Font.font("Courier New", FontWeight.BOLD, FontPosture.REGULAR, 50));
-            text1 = new Text("This is pane 1");
-            text2 = new Text("This is pane 2");
-            text3 = new Text("This is pane 3");
+            for(int b = 0; b < 5; b++)
+            {
+                  ans[b] = new String("1" + b);
+                  qButton[b] = new Button("qButton " + b);
+                  tField[b] = new TextField();
+                  tField[b].setFont(Font.font("Courier New", 50));
+                  text[b] = new Text("This is pane " + b);
+            }
+                              
+            pane0 = pageSetup(pane0, 0);
+            pane1 = pageSetup(pane1, 1);
             
-            pane1.add(text1, 0, 0);
-            pane1.add(aButton, 0, 1);
-            pane1.add(tField1, 0, 2);
-
-            pane2.add(text2, 0, 0);
-            pane2.add(bButton, 0, 1);
-            pane2.add(tField2, 0, 2);
-
-            pane3.add(text3, 0, 0);
-
-            pane4.add(pane1, 0, 0);
-
-            pane1.relocate(10, 50);
-            pane2.relocate(10, 50);
-            pane3.relocate(10, 50);
-            pane4.relocate(10, 100);
-
-            aButton.setOnAction(ae->
-            {
-                  str1 = new String(tField1.getText());
-                  if(str1.equals(ans1))
-                  {
-                        button2.setVisible(true);
-                  }
+            qButton[0].setOnAction(ae->
+            {     
+                  check(0);
             });
-            bButton.setOnAction(ae->
-            {
-                  str2 = new String(tField2.getText());
-                  if(str2.equals(ans2))
-                  {
-                        button3.setVisible(true);
-                  }
+            qButton[1].setOnAction(ae->
+            {     
+                  check(1);
             });
-
-            return pane4;
+            
+            qPane.setStyle("-fx-background-color: blue");
+            qPane.add(pane0, 0, 0);
+            return qPane;
       }
 }
