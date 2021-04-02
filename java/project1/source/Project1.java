@@ -38,12 +38,14 @@ public class Project1 extends Application
       TextField[] tField = new TextField[NUM];
       String[] guess = new String[NUM];
       String[] ans = new String[NUM];
-
       Text[] text = new Text[NUM];
+
       BorderPane root = new BorderPane();
       GridPane pane0 = new GridPane();
       GridPane pane1 = new GridPane();
+      GridPane pane2 = new GridPane();
       GridPane pane3 = new GridPane();
+      GridPane pane4 = new GridPane();
       
       GridPane lPane = new GridPane();
       GridPane qPane = new GridPane();
@@ -76,6 +78,7 @@ public class Project1 extends Application
             root.setCenter(qPane);
       }
 
+      // configure each block of the root pane
       class CustomPane extends StackPane
       {
             public CustomPane(String title)
@@ -86,6 +89,7 @@ public class Project1 extends Application
             }
       }
       
+      // configure the buttons on the left block
       public GridPane leftSide()
       {
             for(int a = 0; a < NUM; a++)
@@ -111,12 +115,23 @@ public class Project1 extends Application
             lButton[2].setOnAction(ae->
             {
                   qPane.getChildren().clear();
+                  qPane.getChildren().add(pane2);
+            });
+            lButton[3].setOnAction(ae->
+            {
+                  qPane.getChildren().clear();
                   qPane.getChildren().add(pane3);
+            });
+            lButton[4].setOnAction(ae->
+            {
+                  qPane.getChildren().clear();
+                  qPane.getChildren().add(pane4);
             });
 
             return lPane;
       }
 
+      // setup an inner pane for the center block
       public GridPane pageSetup(GridPane gPane, Integer i)
       {
             gPane.add(text[i], 0, 0);
@@ -125,6 +140,7 @@ public class Project1 extends Application
             return gPane;
       }
 
+      // check if the user input matches the answer
       public void check(int n)
       {
             guess[n] = new String(tField[n].getText());
@@ -134,6 +150,7 @@ public class Project1 extends Application
             }
       }
 
+      // configure the question pane
       public GridPane centerPage()
       {
             for(int b = 0; b < 5; b++)
@@ -147,7 +164,10 @@ public class Project1 extends Application
                               
             pane0 = pageSetup(pane0, 0);
             pane1 = pageSetup(pane1, 1);
-            
+            pane2 = pageSetup(pane2, 2);
+            pane3 = pageSetup(pane3, 3);
+            pane4 = pageSetup(pane4, 4);
+
             qButton[0].setOnAction(ae->
             {     
                   check(0);
@@ -155,6 +175,14 @@ public class Project1 extends Application
             qButton[1].setOnAction(ae->
             {     
                   check(1);
+            });
+            qButton[2].setOnAction(ae->
+            {     
+                  check(2);
+            });
+            qButton[3].setOnAction(ae->
+            {     
+                  check(3);
             });
             
             qPane.setStyle("-fx-background-color: blue");
