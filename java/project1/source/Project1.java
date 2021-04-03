@@ -46,7 +46,7 @@ public class Project1 extends Application
       GridPane pane2 = new GridPane();
       GridPane pane3 = new GridPane();
       GridPane pane4 = new GridPane();
-      
+
       GridPane lPane = new GridPane();
       GridPane qPane = new GridPane();
 
@@ -88,7 +88,7 @@ public class Project1 extends Application
                   setPadding(new Insets(15, 15, 15, 15));
             }
       }
-      
+
       // configure the buttons on the left block
       public GridPane leftSide()
       {
@@ -161,7 +161,7 @@ public class Project1 extends Application
                   tField[b].setFont(Font.font("Courier New", 50));
                   text[b] = new Text("This is pane " + b);
             }
-                              
+
             pane0 = pageSetup(pane0, 0);
             pane1 = pageSetup(pane1, 1);
             pane2 = pageSetup(pane2, 2);
