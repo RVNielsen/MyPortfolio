@@ -29,6 +29,10 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.geometry.HPos;
 
+import javafx.scene.layout.HBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
 
 public class Project1 extends Application
 {
@@ -47,11 +51,20 @@ public class Project1 extends Application
       GridPane pane3 = new GridPane();
       GridPane pane4 = new GridPane();
 
+      Pane root2 = new Pane();
+
       GridPane lPane = new GridPane();
       GridPane qPane = new GridPane();
 
       Scene scene;
       Stage stage;
+
+      Label hL;
+      HBox h;
+      Stage stage2;
+
+      Image map;
+      ImageView mapView;
 
       @Override
       public void start(Stage stage)
@@ -65,15 +78,38 @@ public class Project1 extends Application
             stage.setTitle("BorderPaneDemo");
             stage.setScene(scene);
             stage.show();
+
+            stage2 = new Stage();
+            hL = new Label("Other window");
+            h = new HBox(hL);
+            h.setPrefWidth(400);
+            h.setPrefHeight(300);
+            stage2.setScene(new Scene(h));
+            stage2.show();
+
+            map = new Image("images/map.jpg");
+            mapView = new ImageView(map);
+            root2.getChildren().addAll(mapView);
+            mapView.setFitWidth(420);
+            mapView.setFitHeight(240);
+            h.setStyle("-fx-background-color: GREEN");
+            h.getChildren().addAll(root2);
       }
 
       // configure the root pane
       public void setup()
       {
+            // root.setStyle("
+            //       -fx-alignment: center;
+            //       -fx-background-color: GRAY;
+            //       -fx-font: 30 Verdana;
+            //       ");
             root.setStyle("-fx-alignment: center");
             root.setStyle("-fx-background-color: GRAY");
-            root.setTop(new CustomPane("Top"));
-            root.setBottom(new CustomPane("Bottom"));
+            root.setStyle("-fx-font: 30 Verdana");
+            // root.setStyle("-fx-font-family: Courier New");
+            root.setTop(new CustomPane("Welcome to this Game!\n"));
+            root.setBottom(new CustomPane("(It is a game)"));
             root.setLeft(lPane);
             root.setCenter(qPane);
       }
@@ -158,7 +194,6 @@ public class Project1 extends Application
                   ans[b] = new String("1" + b);
                   qButton[b] = new Button("qButton " + b);
                   tField[b] = new TextField();
-                  tField[b].setFont(Font.font("Courier New", 50));
                   text[b] = new Text("This is pane " + b);
             }
 
@@ -171,6 +206,7 @@ public class Project1 extends Application
             qButton[0].setOnAction(ae->
             {     
                   check(0);
+                  hL.setText("First button");
             });
             qButton[1].setOnAction(ae->
             {     
