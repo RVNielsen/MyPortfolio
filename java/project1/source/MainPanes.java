@@ -32,30 +32,37 @@ import javafx.scene.image.ImageView;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 
-import code.Questions;
-
+import code.CenterPane;
 
 public class MainPanes extends Application
 {
-      BorderPane root = new BorderPane();
-      GridPane pane0 = new GridPane();
-      GridPane pane1 = new GridPane();
-      GridPane pane2 = new GridPane();
-      GridPane pane3 = new GridPane();
-      GridPane pane4 = new GridPane();
-
+      // number of pages
       final int NUM = 5;
-      Button[] lButton = new Button[NUM];
-      Button[] qButton = new Button[NUM];
-      TextField[] tField = new TextField[NUM];
-      String[] guess = new String[NUM];
-      String[] ans = new String[NUM];
-      Text[] text = new Text[NUM];
 
+      // root pane
+      BorderPane root = new BorderPane();
+      // title pane
       StackPane topPane = new StackPane();
+      // lower pane
       StackPane bottomPane = new StackPane();
+      
+      // buttons to control page switching
+      Button[] lButton = new Button[NUM];
       GridPane lPane = new GridPane();
-      StackPane qPane = new StackPane();
+      
+      // objects for center pages
+      Button[] cButton = new Button[NUM];
+      TextField[] cTField = new TextField[NUM];
+      String[] cGuess = new String[NUM];
+      String[] cAns = new String[NUM];
+      Text cTextLower[] = new Text[NUM];
+      StackPane cPane = new StackPane();
+      // panes placed in the main section of the root pane
+      CenterPane cPane0 = new CenterPane();
+      CenterPane cPane1 = new CenterPane();
+      CenterPane cPane2 = new CenterPane();
+      CenterPane cPane3 = new CenterPane();
+      CenterPane cPane4 = new CenterPane();
 
       Scene scene;
       Stage stage;
@@ -63,25 +70,37 @@ public class MainPanes extends Application
       @Override
       public void start(Stage stage)
       {
-            lPane = leftConfig(); // -----> to leftConfig()
-            qPane = centerConfig(); // -----> to centerConfig()
-            rootConfig(); // -----> to rootConfig()
-            indivConfig(); // -----> to indivConfig
+            rConfig(); // -----> to rConfig()
+            lPane = lConfig(); // -----> to lConfig()
+            cPane = cConfig(); // -----> to cConfig()
+            tConfig(); // -----> to tConfig()
+            bConfig(); // -----> to bConfig()
+
+            cPane0.which(cPane0, 0);
 
             // make a window and configure it
             GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
             int width = gd.getDisplayMode().getWidth();
+            width *= .9;
             int height = gd.getDisplayMode().getHeight();
+            height *= .9;
             Scene scene = new Scene(root, width, height);
             stage.setTitle("The Game");
             stage.setScene(scene);
             stage.show();
+      }
 
-            // Questions q = new Questions(root2); // -----> to Questions(Pane)
+      public void lSetButtons(int i, CenterPane cP)
+      {
+            lButton[i].setOnAction(ae->
+            {
+                  cPane.getChildren().clear();
+                  cPane.getChildren().add(cP);
+            });
       }
 
       // configure the buttons on the left block
-      public GridPane leftConfig()
+      public GridPane lConfig()
       {
             lPane.setStyle("-fx-background-color: #CCE3DE");
             for(int a = 0; a < NUM; a++)
@@ -94,111 +113,89 @@ public class MainPanes extends Application
                   }
             }
 
-            lButton[0].setOnAction(ae->
-            {
-                  qPane.getChildren().clear();
-                  qPane.getChildren().add(pane0);
-            });
-            lButton[1].setOnAction(ae->
-            {
-                  qPane.getChildren().clear();
-                  qPane.getChildren().add(pane1);
-            });
-            lButton[2].setOnAction(ae->
-            {
-                  qPane.getChildren().clear();
-                  qPane.getChildren().add(pane2);
-            });
-            lButton[3].setOnAction(ae->
-            {
-                  qPane.getChildren().clear();
-                  qPane.getChildren().add(pane3);
-            });
-            lButton[4].setOnAction(ae->
-            {
-                  qPane.getChildren().clear();
-                  qPane.getChildren().add(pane4);
-            });
+            lSetButtons(0, cPane0); // -----> to lSetButtons(int, CenterPane)
+            lSetButtons(1, cPane1);
+            lSetButtons(2, cPane2);
+            lSetButtons(3, cPane3);
+            lSetButtons(4, cPane4);
 
             return lPane;
-      }
-
-      // setup an inner pane for the center block
-      public GridPane pageSetup(GridPane gPane, int i)
-      {
-            gPane.add(text[i], 0, 0);
-            // text[i].setStyle("-fx-fill: #F6FFF8");
-            gPane.add(qButton[i], 0, 1);
-            gPane.add(tField[i], 0, 2);
-            return gPane;
       }
 
       // check if the user input matches the answer
       public void check(int n)
       {
-            guess[n] = new String(tField[n].getText());
-            if(guess[n].equals(ans[n]))
+            cGuess[n] = new String(cTField[n].getText());
+            if(cGuess[n].equals(cAns[n]))
             {
+                  cTextLower[n].setText("yes :)");
                   lButton[n + 1].setVisible(true);
             }
+            else
+            {
+                  cTextLower[n].setText("WRONGGGGGGG!!!!!");
+            }
+      }
+
+      // setup an inner pane for the center block
+      public CenterPane cPageSetup(CenterPane gPane, int i)
+      {
+            gPane.add(cButton[i], 0, 1);
+            gPane.add(cTField[i], 0, 2);
+            gPane.add(cTextLower[i], 0, 3);
+            if(i < NUM - 1)
+            {
+                  cButton[i].setOnAction(ae->
+                  {     
+                        check(i); // -----> to check(int)
+                  });
+            }
+            return gPane;
       }
 
       // configure the question pane
-      public StackPane centerConfig()
+      public StackPane cConfig()
       {
             for(int b = 0; b < 5; b++)
             {
-                  ans[b] = new String("1" + b);
-                  qButton[b] = new Button("qButton " + b);
-                  tField[b] = new TextField();
-                  text[b] = new Text("This is pane " + b);
+                  cAns[b] = new String("1" + b);
+                  cButton[b] = new Button("cButton " + b);
+                  cTField[b] = new TextField();
+                  cTextLower[b] = new Text("This is pane " + b);
             }
 
-            pane0 = pageSetup(pane0, 0); // -----> to pageSetup(GridPane, int)
-            pane1 = pageSetup(pane1, 1);
-            pane2 = pageSetup(pane2, 2);
-            pane3 = pageSetup(pane3, 3);
-            pane4 = pageSetup(pane4, 4);
+            cPane0 = cPageSetup(cPane0, 0); // -----> to cPageSetup(GridPane, int)
+            cPane1 = cPageSetup(cPane1, 1);
+            cPane2 = cPageSetup(cPane2, 2);
+            cPane3 = cPageSetup(cPane3, 3);
+            cPane4 = cPageSetup(cPane4, 4);
 
-            qButton[0].setOnAction(ae->
-            {     
-                  check(0); // -----> to check(int)
-            });
-            qButton[1].setOnAction(ae->
-            {     
-                  check(1);
-            });
-            qButton[2].setOnAction(ae->
-            {     
-                  check(2);
-            });
-            qButton[3].setOnAction(ae->
-            {     
-                  check(3);
-            });
-            qPane.setStyle("-fx-background-color: #A4C3B2");
-            qPane.getChildren().add(pane0);
-            StackPane.setAlignment(pane0, Pos.CENTER);
-            return qPane;
+            cPane.setStyle("-fx-background-color: #A4C3B2");
+            cPane.getChildren().add(cPane0);
+            StackPane.setAlignment(cPane0, Pos.CENTER);
+            return cPane;
       }
 
-      public void rootConfig()
+      public void rConfig()
       {
             root.setStyle("-fx-alignment: center");
             root.setStyle("-fx-font: 30 Verdana");
             root.setTop(topPane);
             root.setBottom(bottomPane);
             root.setLeft(lPane);
-            root.setCenter(qPane); 
+            root.setCenter(cPane); 
       }
 
-      // configure the root pane
-      public void indivConfig()
+      public void tConfig()
       {
             topPane.getChildren().addAll(new Text("Welcome to the Game!"));
             topPane.setStyle("-fx-background-color: #6B9080");
             topPane.setPadding(new Insets(15, 15, 15, 15));
+      }
 
+      // configure the root pane
+      public void bConfig()
+      {
             bottomPane.setStyle("-fx-background-color: #EAF4F4");
             bottomPane.getChildren().addAll(new Text("(It is a game)"));
             bottomPane.setPadding(new Insets(15, 15, 15, 15));
