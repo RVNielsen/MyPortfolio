@@ -1,1 +1,1 @@
-Main-Class: code.Project1
+Main-Class: code.MainPanes
