@@ -32,6 +32,9 @@ import javafx.scene.image.ImageView;
 import java.awt.GraphicsDevice;
 import java.awt.GraphicsEnvironment;
 
+import javafx.scene.shape.Rectangle;
+import javafx.scene.paint.Color;
+
 import code.CenterPane;
 
 public class MainPanes extends Application
@@ -76,7 +79,11 @@ public class MainPanes extends Application
             tConfig(); // -----> to tConfig()
             bConfig(); // -----> to bConfig()
 
-            cPane0.which(cPane0, 0);
+            cPane0.which(cPane0, 0); // -----> to which(CenterPane, int)
+            cPane0.which(cPane1, 1);
+            cPane0.which(cPane2, 2);
+            cPane0.which(cPane3, 3);
+            cPane0.which(cPane4, 4);
 
             // make a window and configure it
             GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
@@ -90,6 +97,7 @@ public class MainPanes extends Application
             stage.show();
       }
 
+      // set up the left side buttons
       public void lSetButtons(int i, CenterPane cP)
       {
             lButton[i].setOnAction(ae->
@@ -176,6 +184,7 @@ public class MainPanes extends Application
             return cPane;
       }
 
+      // configure the root pane
       public void rConfig()
       {
             root.setStyle("-fx-alignment: center");
@@ -186,6 +195,7 @@ public class MainPanes extends Application
             root.setCenter(cPane); 
       }
 
+      // configure the header pane
       public void tConfig()
       {
             topPane.getChildren().addAll(new Text("Welcome to the Game!"));
@@ -193,7 +203,7 @@ public class MainPanes extends Application
             topPane.setPadding(new Insets(15, 15, 15, 15));
       }
 
-      // configure the root pane
+      // configure the footer pane
       public void bConfig()
       {
             bottomPane.setStyle("-fx-background-color: #EAF4F4");

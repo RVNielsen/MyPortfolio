@@ -18,3 +18,12 @@ p.getChildren().addAll(mapView);
 mapView.setFitWidth(420);
 mapView.setFitHeight(240);
 h.getChildren().addAll(p);
+
+            System.out.println("prevClick[currentPlayer] = " + prevClick[currentPlayer]);
+            System.out.println("e = " + e);
+            System.out.println("x = " + e % 6);
+            System.out.println("y = " + e / 6);
+            System.out.println("dx = " + ((prevClick[currentPlayer] % 6) - (e % 6)));
+            System.out.println("dy = " + ((prevClick[currentPlayer] / 6) - (e / 6)));
+                        System.out.println(checkDistance);
+            System.out.println("\n\n");
