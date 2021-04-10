@@ -15,7 +15,7 @@ import javafx.scene.input.MouseEvent;
 
 public class Pane1
 {
-      // number of rectangles on the board
+      // number of squares on the board
       private final int RNUM = 42;
       private final int[] BLACKSPACES = {7, 10, 12, 13, 16, 17, 18, 23, 24, 25, 28, 29, 31, 34};
       private final int[] WHITESPACES = {0, 1, 2, 3, 4, 5, 6, 8, 9, 11, 14, 15, 19, 20, 21, 22, 
@@ -43,7 +43,7 @@ public class Pane1
       private Button leftButton = new Button();
 
       // page 1 main function
-      // board
+      // horse game
       protected String pane1Main(CenterPane cP, Button lB)
       {
             setNotTaken();
@@ -89,7 +89,7 @@ public class Pane1
             }
       }
 
-      // previous click for color c is rectangle _
+      // previous click for color c is square _
       protected void prevConfig()
       {
             for(int c = 0; c < PLAYERNUM; c++)
@@ -109,7 +109,7 @@ public class Pane1
             return false;
       }
 
-      // when initial row rectangles are clicked, change the player color
+      // when initial row squares are clicked, change the player color
       protected void colorSquaresClick(int b)
       {
             switch(b)
@@ -152,6 +152,7 @@ public class Pane1
             for(int u = 0; u < RNUM; u++)
             {
                   r[u] = new Rectangle(50, 50);
+                  // place all 0 - RNUM squares in a grid formation
                   x = u % 6 + 1;
                   y = u / 6 + 1;
                   r[u].setFill(Color.WHITE);
@@ -173,10 +174,10 @@ public class Pane1
                   @Override
                   public void handle(MouseEvent t)
                   {
-                        System.out.println("currentPlayer is: " + currentPlayer);
-                        System.out.println("prevClick[currentPlayer] is: " + prevClick[currentPlayer]);
+                        // if the space is free and the correct distance away
                         if(isValidSpace(i) && taken[i] == false)
                         {
+                              // fill the space with the current player's color
                               switch(currentPlayer)
                               {
                                     case 0:
@@ -200,10 +201,12 @@ public class Pane1
                                     default:
                                           a.setFill(Color.GRAY);
                               }
+                              // set this space to the current player's previous click
                               prevClick[currentPlayer] = i;
-                              System.out.println("prev click is now " + prevClick[currentPlayer]);
+                              // set this space as taken
                               taken[i] = true;
                               takenFlag = true;
+                              // check if all spaces are taken
                               for(int h = 0; h < WSNUM; h++)
                               {
                                     if(taken[WHITESPACES[h]] == false)
@@ -211,32 +214,34 @@ public class Pane1
                                           takenFlag = false;
                                     }
                               }
+                              // if all spaces are taken, the game is over
                               if(takenFlag == true)
                               {
                                     b.setVisible(true); // ***Button2 visible***
                               }
                         }
+                        // if the click was not on a valid space
                         else
                         {
+                              // get the color of the offending player
                               tempTangle.setFill(board[prevClick[currentPlayer]].getFill());
-                              // for all spaces
-                              for(int k = 0; k < WSNUM; k++)
+                              for(int k = 0; k < WSNUM - 6; k++)
                               {
-                                    if(board[WHITESPACES[k]].getFill() != Color.WHITE)
+                                    // if a square matches the offending player's color,
+                                    //    set it to white and not taken
+                                    if(tempTangle.getFill().equals(board[WHITESPACES[k]].getFill()))
                                     {
-                                          // if the offending space has the same color as the previous space
-                                          if(board[WHITESPACES[k]].getFill() == tempTangle.getFill())
-                                          {
-                                                if(k < WSNUM - 6)
-                                                {
-                                                      board[WHITESPACES[k]].setFill(Color.WHITE);
-                                                }
-                                                else
-                                                {
-                                                      prevClick[currentPlayer] = WHITESPACES[k];
-                                                      break;
-                                                }
-                                          }
+                                          board[WHITESPACES[k]].setFill(Color.WHITE);
+                                          taken[WHITESPACES[k]] = false;
+                                    }
+                              }
+                              // find the source of the current player and set it as the previous click
+                              for(int w = RNUM - 6; w < RNUM; w++)
+                              {
+                                    if(tempTangle.getFill().equals(board[w].getFill()))
+                                    {
+                                          prevClick[currentPlayer] = w;
+                                          break;
                                     }
                               }
                         }
