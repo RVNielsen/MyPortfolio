@@ -17,29 +17,38 @@ public class Pane1
 {
       // number of squares on the board
       private final int RNUM = 42;
+
+      // an array of RNUM rectangles arranged as a board
+      private Rectangle[] board = new Rectangle[RNUM];
       private final int[] BLACKSPACES = {7, 10, 12, 13, 16, 17, 18, 23, 24, 25, 28, 29, 31, 34};
       private final int[] WHITESPACES = {0, 1, 2, 3, 4, 5, 6, 8, 9, 11, 14, 15, 19, 20, 21, 22, 
             26, 27, 30, 32, 33, 35, 36, 37, 38, 39, 40, 41};
+      // number of whitespaces
       private final int WSNUM = 28;
 
+      // is an indivdual square taken
       private boolean[] taken = new boolean[RNUM];
-      private Rectangle tempTangle = new Rectangle();
+      // used for checking if all sqaures have been taken
+      private boolean takenFlag;
 
-      // number of players
-      private final int PLAYERNUM = 6;
-      private final int DISTANCE = 5;
-
+      // clear all sqaures (besides sources)
       private Button clearButton = new Button("Clear");
-      private Rectangle[] board = new Rectangle[RNUM];
+
+      private int currentPlayer = 0;
+      private final int PLAYERNUM = 6;
+      // stores the square that the current player last clicked
+      private int[] prevClick = new int[PLAYERNUM];
+      
+      // temporary rectangle for storing a color
+      private Rectangle tempTangle = new Rectangle();
 
       // for placing the buttons on the pane
       private int x;
       private int y;
-      private int currentPlayer = 0;
-      private int[] prevClick = new int[PLAYERNUM];
-
+      // distance from previous space to the attempted next space
       private double checkDistance;
-      private boolean takenFlag;
+
+      // buttons for changing panes
       private Button leftButton = new Button();
 
       // page 1 main function
@@ -102,7 +111,7 @@ public class Pane1
       protected boolean isValidSpace(int e)
       {
             checkDistance = Math.pow((prevClick[currentPlayer] % 6 - e % 6), 2) + (Math.pow((prevClick[currentPlayer] / 6 - e / 6), 2));
-            if(checkDistance == DISTANCE)
+            if(checkDistance == 5)
             {
                   return true;
             }
