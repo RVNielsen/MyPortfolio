@@ -40,7 +40,7 @@ import code.CenterPane;
 public class MainPanes extends Application
 {
       // number of pages
-      final int NUM = 5;
+      final int PAGENUM = 5;
 
       // root pane
       BorderPane root = new BorderPane();
@@ -50,15 +50,9 @@ public class MainPanes extends Application
       StackPane bottomPane = new StackPane();
       
       // buttons to control page switching
-      Button[] lButton = new Button[NUM];
+      Button[] lButton = new Button[PAGENUM];
       GridPane lPane = new GridPane();
       
-      // objects for center pages
-      Button[] cButton = new Button[NUM];
-      TextField[] cTField = new TextField[NUM];
-      String[] cGuess = new String[NUM];
-      String[] cAns = new String[NUM];
-      Text cTextLower[] = new Text[NUM];
       StackPane cPane = new StackPane();
       // panes placed in the main section of the root pane
       CenterPane cPane0 = new CenterPane();
@@ -79,11 +73,11 @@ public class MainPanes extends Application
             tConfig(); // -----> to tConfig()
             bConfig(); // -----> to bConfig()
 
-            cPane0.which(cPane0, 0); // -----> to which(CenterPane, int)
-            cPane0.which(cPane1, 1);
-            cPane0.which(cPane2, 2);
-            cPane0.which(cPane3, 3);
-            cPane0.which(cPane4, 4);
+            cPane0.which(cPane0, 0, lButton[1]); // -----> to which(CenterPane, int)
+            cPane0.which(cPane1, 1, lButton[2]);
+            cPane0.which(cPane2, 2, lButton[3]);
+            cPane0.which(cPane3, 3, lButton[4]);
+            cPane0.which(cPane4, 4, lButton[0]);
 
             // make a window and configure it
             GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
@@ -97,21 +91,22 @@ public class MainPanes extends Application
             stage.show();
       }
 
-      // set up the left side buttons
-      public void lSetButtons(int i, CenterPane cP)
+      // configure the root pane
+      public void rConfig()
       {
-            lButton[i].setOnAction(ae->
-            {
-                  cPane.getChildren().clear();
-                  cPane.getChildren().add(cP);
-            });
+            root.setStyle("-fx-alignment: center");
+            root.setStyle("-fx-font: 30 Verdana");
+            root.setTop(topPane);
+            root.setBottom(bottomPane);
+            root.setLeft(lPane);
+            root.setCenter(cPane); 
       }
-
+      
       // configure the buttons on the left block
       public GridPane lConfig()
       {
             lPane.setStyle("-fx-background-color: #CCE3DE");
-            for(int a = 0; a < NUM; a++)
+            for(int a = 0; a < PAGENUM; a++)
             {
                   lButton[a] = new Button("lButton " + a);
                   lPane.add(lButton[a], 0, a);
@@ -129,70 +124,24 @@ public class MainPanes extends Application
 
             return lPane;
       }
-
-      // check if the user input matches the answer
-      public void check(int n)
+      
+      // set up the left side buttons
+      public void lSetButtons(int i, CenterPane cP)
       {
-            cGuess[n] = new String(cTField[n].getText());
-            if(cGuess[n].equals(cAns[n]))
+            lButton[i].setOnAction(ae->
             {
-                  cTextLower[n].setText("yes :)");
-                  lButton[n + 1].setVisible(true);
-            }
-            else
-            {
-                  cTextLower[n].setText("WRONGGGGGGG!!!!!");
-            }
-      }
-
-      // setup an inner pane for the center block
-      public CenterPane cPageSetup(CenterPane gPane, int i)
-      {
-            gPane.add(cButton[i], 0, 1);
-            gPane.add(cTField[i], 0, 2);
-            gPane.add(cTextLower[i], 0, 3);
-            if(i < NUM - 1)
-            {
-                  cButton[i].setOnAction(ae->
-                  {     
-                        check(i); // -----> to check(int)
-                  });
-            }
-            return gPane;
+                  cPane.getChildren().clear();
+                  cPane.getChildren().add(cP);
+            });
       }
 
       // configure the question pane
       public StackPane cConfig()
       {
-            for(int b = 0; b < 5; b++)
-            {
-                  cAns[b] = new String("1" + b);
-                  cButton[b] = new Button("cButton " + b);
-                  cTField[b] = new TextField();
-                  cTextLower[b] = new Text("This is pane " + b);
-            }
-
-            cPane0 = cPageSetup(cPane0, 0); // -----> to cPageSetup(GridPane, int)
-            cPane1 = cPageSetup(cPane1, 1);
-            cPane2 = cPageSetup(cPane2, 2);
-            cPane3 = cPageSetup(cPane3, 3);
-            cPane4 = cPageSetup(cPane4, 4);
-
-            cPane.setStyle("-fx-background-color: #A4C3B2");
             cPane.getChildren().add(cPane0);
-            StackPane.setAlignment(cPane0, Pos.CENTER);
+            cPane.setStyle("-fx-background-color: #A4C3B2");
+            cPane.setAlignment(cPane0, Pos.CENTER);
             return cPane;
-      }
-
-      // configure the root pane
-      public void rConfig()
-      {
-            root.setStyle("-fx-alignment: center");
-            root.setStyle("-fx-font: 30 Verdana");
-            root.setTop(topPane);
-            root.setBottom(bottomPane);
-            root.setLeft(lPane);
-            root.setCenter(cPane); 
       }
 
       // configure the header pane
@@ -206,8 +155,14 @@ public class MainPanes extends Application
       // configure the footer pane
       public void bConfig()
       {
-            bottomPane.setStyle("-fx-background-color: #EAF4F4");
             bottomPane.getChildren().addAll(new Text("(It is a game)"));
+            bottomPane.setStyle("-fx-background-color: #EAF4F4");
             bottomPane.setPadding(new Insets(15, 15, 15, 15));
       }
+
+      public static void main(String[] args) 
+      {        
+            launch(args);    
+      }
+
 }
