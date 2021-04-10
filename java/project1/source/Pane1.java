@@ -3,13 +3,15 @@ package code;
 import javafx.application.Application;
 import javafx.scene.layout.GridPane;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
 import javafx.event.EventHandler;
 import javafx.scene.text.*;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
 import java.util.Scanner;
 import javafx.scene.control.Button;
+
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 
 import javafx.scene.input.MouseEvent;
 
@@ -50,6 +52,10 @@ public class Pane1
 
       // buttons for changing panes
       private Button leftButton = new Button();
+
+      // used for setting the square sizes relative to the screen size
+      GraphicsDevice gd = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
+      private int rSize;
 
       // page 1 main function
       // horse game
@@ -157,10 +163,12 @@ public class Pane1
       // set up the board
       protected Rectangle[] boardConfig(CenterPane cP)
       {
+            rSize = gd.getDisplayMode().getWidth();
+            rSize *= .05;
             Rectangle[] r = new Rectangle[RNUM];
             for(int u = 0; u < RNUM; u++)
             {
-                  r[u] = new Rectangle(50, 50);
+                  r[u] = new Rectangle(rSize, rSize);
                   // place all 0 - RNUM squares in a grid formation
                   x = u % 6 + 1;
                   y = u / 6 + 1;
