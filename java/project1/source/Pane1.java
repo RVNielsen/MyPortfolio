@@ -59,7 +59,7 @@ public class Pane1
 
       // page 1 main function
       // horse game
-      protected String pane1Main(CenterPane cP, Button lB)
+      protected void pane1Main(CenterPane cP, Button lB)
       {
             setNotTaken();
             cP.add(clearButton, 0, 0);
@@ -74,7 +74,6 @@ public class Pane1
             {
                   colorSquaresClick(y);
             }
-            return "Green";
       }
 
       // make all squares (besides source) white

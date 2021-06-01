@@ -13,7 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.control.Button;
 
-
+import code.Pane2;
 import code.Pane1;
 import code.Pane0;
 
@@ -21,11 +21,13 @@ public class CenterPane extends GridPane
 {
       private Pane0 p0 = new Pane0();
       private Pane1 p1 = new Pane1();
+      private Pane2 p2 = new Pane2();
 
       // which pane are we dealing with
       // return the answer for the question on that pane
       public void which(CenterPane cP, int i, Button b)
       {
+            b.setVisible(true);
             switch(i)
             {
                   case 0:
@@ -35,6 +37,10 @@ public class CenterPane extends GridPane
                   case 1:
                         // horse game
                         p1.pane1Main(cP, b);
+                        break;
+                  case 2:
+                        // calendar game
+                        p2.pane2Main(cP, b);
                         break;
                   default:
                         
