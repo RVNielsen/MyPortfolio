@@ -10,4 +10,4 @@ Thesaurusizer (Python): https://github.com/RVNielsen/MyPortfolio/blob/main/pytho
 rvnhmq@umsystem.edu
 
 ## LinkedIn
-https://www.linkedin.com/in/rachel-nielsen-383050171/
+https://www.linkedin.com/in/rvnielsen/
