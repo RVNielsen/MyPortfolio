@@ -4,7 +4,7 @@ Hi, my name is Rachel Nielsen. Welcome to my portfolio! This is a collection of 
 ## Featured Projects
 Thesaurusizer (Python): https://github.com/RVNielsen/MyPortfolio/blob/main/python/thesaurusize/
 
-Bioinformatics Clustermap Visualizer (Python): https://github.com/RVNielsen/MyPortfolio/tree/main/python/hic_clustermap
+Genomics Clustermap Visualizer (Python): https://github.com/RVNielsen/MyPortfolio/tree/main/python/hic_clustermap
 
 ## Email
 rvnhmq@umsystem.edu
