@@ -23,7 +23,7 @@ And outputs:
 clustermap.py - uses thesaurus.com to replace words
 
 ## Acknowledgements
-Haley Abel was my mentor for this summer. She provided the idea for the project as well as code to start with that plotted matrices as a clustermap.
+Haley Abel was my mentor for this summer. She provided the idea for the project as well as part of the code in the clustermap.py file to start with that plotted matrices as a clustermap.
 
 Chris Miller organized the internship program this summer.
 
