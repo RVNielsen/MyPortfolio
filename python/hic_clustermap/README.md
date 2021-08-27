@@ -23,7 +23,8 @@ And outputs:
 clustermap.py - uses thesaurus.com to replace words
 
 sources.pdf - all sources I gathered throughout the 8-week internship
-              some were for understanding genomics in general or my final presentation, but most were related to the program itself
+
+            -some were for understanding genomics in general or my final presentation, but most were related to the program itself
 
 ## Acknowledgements
 Haley Abel was my mentor for this summer. She provided the idea for the project as well as part of the code in the clustermap.py file to start with that plotted matrices as a clustermap.
