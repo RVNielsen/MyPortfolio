@@ -7,7 +7,7 @@ Genomics Clustermap Visualizer (Python): https://github.com/RVNielsen/MyPortfoli
 Thesaurusizer (Python): https://github.com/RVNielsen/MyPortfolio/blob/main/python/thesaurusize/
 
 ## Email
-rvnhmq@umsystem.edu
+rachelvnielsen@gmail.com
 
 ## LinkedIn
 https://www.linkedin.com/in/rvnielsen/
