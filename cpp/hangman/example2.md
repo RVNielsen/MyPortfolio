@@ -25,11 +25,11 @@ chiCken89 (and) waf_flEs
 numbers and special characters were removed (besides spaces) leaving a valid word - "chicken and waffles"
 
 uppercase letters were also changed to lowercase 
+
+(there are normally about 50 blank lines here when running in the command line so that player 2 does not see the word, but they were removed for readability)
 ```txt
 _ _ _ _ _ _ _   _ _ _   _ _ _ _ _ _ _
 ```
-(there are normally about 50 blank lines here when running in the command line so that player 2 does not see the word, but they were removed for readability)
-
 the number of letters is represented by underscores and spaces are automatically filled in
 ```txt
 Player 2, guess a letter:
