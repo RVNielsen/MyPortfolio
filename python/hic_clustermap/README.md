@@ -29,4 +29,4 @@ Haley Abel was my mentor for this summer. She provided the idea for the project 
 
 Chris Miller organized the internship program this summer.
 
-Tim Ley lead the lab I was a part of for the summer.
+Tim Ley led the lab I was a part of for the summer.
