@@ -1,7 +1,4 @@
-# bot.py
 import os
-from urllib import response
-
 import discord
 from dotenv import load_dotenv
 from thes import *
@@ -27,7 +24,7 @@ async def on_message(message):
     
     if message.content[0:3] == 'T: ':
         try:
-            thesMessage = main(message.content.replace('\n', ' '))
+            thesMessage = thesMain(message.content)
             await message.reply(thesMessage)
         except:
             await message.reply('**Oops, error! :(**')
