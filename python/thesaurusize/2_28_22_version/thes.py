@@ -6,99 +6,90 @@ from random import seed
 from random import randint
 import time
 
-FILENAME = 'illegallearning.txt'
 VOWELS = ['a', 'e', 'i', 'o', 'u']
 
-def thes(oWord: str) -> str:
-    url = 'https://www.thesaurus.com/browse/' + oWord
-    req = requests.get(url, 'html.parser')
+# ---return a random synonym from thesaurus.com for word--- 
+def thes(word: str) -> str:
+    url = 'https://www.thesaurus.com/browse/' + word # webaddress for thesuarus.com page for word
+    req = requests.get(url, 'html.parser') # code from the thesaurus.com page for word
     seed(round(time.time() * 1000))
-    randNum = randint(1, 5)
-    return(req.text.split('href="/browse/')[randNum].split('"')[0].replace('%20', ' '))
+    randSynNum = randint(1, 5)
+    return(req.text.split('href="/browse/')[randSynNum].split('"')[0].replace('%20', ' '))
 
-
-def getNonLetters(str1: str, str1Reg: str) -> str:
-    diffStr1 = ''
-    for let in str1:
-        if let not in str1Reg:
-            diffStr1 += let
+# ---return the characters attached to word (quotes, parentheses, etc.)---
+def getNonLetters(word: str, wordLets: str) -> str:
+    chars = '' # characters attached to word
+    for let in word:
+        if let not in wordLets:
+            chars += let
         else:
-            diffStr1 += '`'
-    return(diffStr1)
+            chars += '`'
+    return(chars)
 
-
-def checkLC(LC: character, n: character, DQE: int) -> bool:
-    if LC == '(':
+# ---return True or False if a space should be added before the current word---
+def shouldAddSpace(prevChar: character, c: character, dqEven: int) -> bool:
+    if prevChar == '(':
         return(False)
-    if LC.isnumeric() and n == '.':
+    elif prevChar.isnumeric() and c == '.':
         return(False)
-    elif LC == '"' and DQE == 0:
+    elif prevChar == '"' and dqEven == 0:
         return(False)
     else:
         return(True)
 
-
-def main(oLines: str) -> str:
-    outputStr = ''
-    fCommon = open('commonWords.txt', 'r')
-    commonWords = str(fCommon.read()).strip('\n')
-    aFlag = False
-    anFlag = False
-    dQuotesEven = 1
-    for a in re.split(' |-', oLines):
-        if re.match('[0-9]', a):
-            regA = ''
-            aNonLet = '`'
-            tWord = str(a)
-        else:
-            regA = re.sub(r'[^a-zA-Z]', '', a)
-            aNonLet = getNonLetters(a, regA)
-            if regA.lower() not in commonWords:
-                tWord = thes(regA)
-                if regA.isupper():
-                    tWord = tWord.upper()
-                elif regA[0].isupper():
-                    tWord = tWord.capitalize()
+# ---take discord message as input and return the message with synonyms in place of uncommon words---
+def thesMain(message: str) -> str:
+    thesMessage = '' # Thesaurusized message to be returned 
+    aFlag = False # was previous character 'a'
+    anFlag = False # was previous character 'an'
+    dqEven = 1 # is there an even number of double quotes
+    message = message.replace('\n', ' ')
+    comFile = open('commonWords.txt', 'r')
+    comWords = str(comFile.read())
+    for word in re.split(' |-', message):
+        chars = '`' # characters attached to word ('`' means none)
+        addedToTM = False # has word been added to thesMessage
+        prevChar = '' # previous character
+        wordLets = '' # letters in the word
+        wordSyn = str(word) # synonymn of the word
+        if re.match(r'[^0-9]', word):
+            wordLets = re.sub(r'[^a-zA-Z\']', '', word)
+            chars = getNonLetters(word, wordLets)
+            if wordLets.lower() in comWords:
+                wordSyn = wordLets
             else:
-                if '\'' in a:
-                    tWord = a
-                    aNonLet = '`'
-                else:
-                    tWord = regA
-        if aFlag == True and tWord[0] in VOWELS:
-            outputStr += 'n'
-        if anFlag == True and tWord[0] not in VOWELS:
-            outputStr = outputStr[:-1]
-        if regA.lower() == 'a':
-            aFlag = True
-        else:
-            aFlag = False
-        if regA.lower() == 'an':
-            anFlag = True
-        else:
-            anFlag = False
-        wordFlag = False
-        lastChar = ''
-        if bool(aNonLet):
-            for n in aNonLet:
-                if n == '`':
-                    if wordFlag == False:
-                        if tWord[-1].isalnum() and checkLC(lastChar, n, dQuotesEven):
-                            outputStr += ' '
-                        wordFlag = True
-                        outputStr += tWord
-                else:
-                    if n == '"':
-                        if dQuotesEven == 1:
-                            outputStr += ' '
-                        dQuotesEven = (dQuotesEven + 1) % 2
-                    if n == '(':
-                        outputStr += ' '
-                    if n != '\'':
-                        outputStr += n
-                        lastChar = n
-    return(outputStr[3:])
-
-
-if __name__ == "__main__":
-    main()
+                wordSyn = thes(wordLets)
+                if wordLets.isupper():
+                    wordSyn = wordSyn.upper()
+                elif wordLets[0].isupper():
+                    wordSyn = wordSyn.capitalize()
+            if aFlag == True and wordSyn[0] in VOWELS:
+                thesMessage += 'n'
+            elif anFlag == True and wordSyn[0] not in VOWELS:
+                thesMessage = thesMessage[:-1]
+            if wordLets.lower() == 'a':
+                aFlag = True
+            else:
+                aFlag = False
+            if wordLets.lower() == 'an':
+                anFlag = True
+            else:
+                anFlag = False
+        for c in chars:
+            if c == '`':
+                if addedToTM == False:
+                    if wordSyn[-1].isalnum() and shouldAddSpace(prevChar, c, dqEven):
+                        thesMessage += ' '
+                    addedToTM = True
+                    thesMessage += wordSyn
+            else:
+                if c == '"':
+                    if dqEven == 1:
+                        thesMessage += ' '
+                    dqEven = (dqEven + 1) % 2
+                elif c == '(':
+                    thesMessage += ' '
+                elif c != '\'':
+                    thesMessage += c
+                    prevChar = c
+    return(thesMessage[3:])
