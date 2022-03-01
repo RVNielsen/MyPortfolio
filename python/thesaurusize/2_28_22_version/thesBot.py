@@ -30,6 +30,6 @@ async def on_message(message):
             await message.reply('**Oops, error! :(**')
 
     if message.content == 'T: help':
-        await message.channel.send('Welcome to the Thesaurusizer Bot!\nThis bot will take a word, phrase, or small paragraph and replace each uncommon word with a \"synonym\". Who needs grammarly when you have this to spice up your writing?\n\nUse \'T: \' to Thesaurusize your message.\n**Example**\nT: This is an example\n**Reply from ThesaurusizerBot**\nThis is an illustration\n\nThings that will break the bot include:\n-Excessively long non-words\n-Newlines\n-Uncommon characters')
+        await message.channel.send('Welcome to the Thesaurusizer Bot!\nThis bot will take a word, phrase, or small paragraph and replace each uncommon word with a \"synonym\". Who needs grammarly when you have this to spice up your writing?\n\nUse \'T: \' to Thesaurusize your message.\n**Example**\nT: This is an example\n**Reply from ThesaurusizerBot**\nThis is an illustration')
 
 client.run(TOKEN)
