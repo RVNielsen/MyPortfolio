@@ -45,7 +45,7 @@ def thesMain(message: str) -> str:
     dqEven = 1 # is there an even number of double quotes
     comFile = open('commonWords.txt', 'r')
     comWords = str(comFile.read())
-    for word in re.split(' |-', message):
+    for word in re.split(' |-|\n', message):
         if bool(word):
             chars = '`' # characters attached to word ('`' means none)
             addedToTM = False # has word been added to thesMessage
