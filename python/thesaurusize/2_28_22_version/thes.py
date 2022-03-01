@@ -38,6 +38,7 @@ def shouldAddSpace(prevChar: character, c: character, dqEven: int) -> bool:
 
 # ---take discord message as input and return the message with synonyms in place of uncommon words---
 def thesMain(message: str) -> str:
+    print('in other', flush=True)
     thesMessage = '' # Thesaurusized message to be returned 
     aFlag = False # was previous character 'a'
     anFlag = False # was previous character 'an'
@@ -87,7 +88,7 @@ def thesMain(message: str) -> str:
                         thesMessage += ' '
                     dqEven = (dqEven + 1) % 2
                 elif c == '(':
-                    thesMessage += ' '
+                    thesMessage += ' ('
                 elif c != '\'':
                     thesMessage += c
                     prevChar = c
