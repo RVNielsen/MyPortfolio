@@ -43,7 +43,6 @@ def thesMain(message: str) -> str:
     aFlag = False # was previous character 'a'
     anFlag = False # was previous character 'an'
     dqEven = 1 # is there an even number of double quotes
-    message = re.sub(' +', ' ', message.replace('\n', ' '))
     comFile = open('commonWords.txt', 'r')
     comWords = str(comFile.read())
     for word in re.split(' |-', message):
