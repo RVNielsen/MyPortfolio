@@ -23,7 +23,6 @@ this
 have
 from
 or
-one
 had
 by
 but
@@ -115,8 +114,16 @@ don't
 does
 doesn't
 let's
+didn't
 mr.
 mrs.
 miss.
 dr.
 ms.
+sunday
+monday
+tuesday
+wednesday
+thursday
+friday
+saturday

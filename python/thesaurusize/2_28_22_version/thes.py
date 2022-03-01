@@ -13,7 +13,7 @@ def thes(word: str) -> str:
     req = requests.get(url, 'html.parser') # code from the thesaurus.com page for word
     seed(round(time.time() * 1000))
     randSynNum = randint(1, 5)
-    return(req.text.split('href="/browse/')[randSynNum].split('"')[0].replace('%20', ' '))
+    return(req.text.split('href="/browse/')[randSynNum].split('"')[0].replace('%20', ' ').replace('%27', '\''))
 
 # ---return the characters attached to word (quotes, parentheses, etc.)---
 def getNonLetters(word: str, wordLets: str) -> str:
@@ -28,6 +28,7 @@ def getNonLetters(word: str, wordLets: str) -> str:
 # ---return True or False if a space should be added before the current word---
 def shouldAddSpace(prevChar: character, c: character, dqEven: int) -> bool:
     if prevChar == '(':
+        # print('here', flush=True)
         return(False)
     elif prevChar.isnumeric() and c == '.':
         return(False)
@@ -90,5 +91,5 @@ def thesMain(message: str) -> str:
                     thesMessage += ' ('
                 elif c != '\'':
                     thesMessage += c
-                    prevChar = c
+                prevChar = c
     return(thesMessage[3:])
