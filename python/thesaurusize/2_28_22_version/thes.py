@@ -1,5 +1,4 @@
-from tokenize import Triple
-from numpy import character, void
+from numpy import character
 import requests
 import re
 from random import seed
