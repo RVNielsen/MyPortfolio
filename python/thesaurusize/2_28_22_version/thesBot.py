@@ -6,6 +6,8 @@ from thes import *
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD = os.getenv('DISCORD_GUILD')
+CHANNEL = int(os.getenv('CHANNEl'))
+AUTHOR = int(os.getenv('AUTHOR'))
 
 client = discord.Client()
 
@@ -14,15 +16,25 @@ async def on_ready():
     for guild in client.guilds:
         if guild.name == GUILD:
             break
+    
+    channel = client.get_channel(CHANNEL)
+    await channel.send('ThesaurusizerBot is now awake')
 
     print(f'{client.user} is connected to the following guild:\n{guild.name}(id: {guild.id})', flush=True)
+
 
 @client.event
 async def on_message(message):
     if message.author == client.user:
         return
+
     
     if message.content[0:3] == 'T: ':
+        if message.author.id == AUTHOR:
+            if message.content == 'T: quit':
+                channel = client.get_channel(CHANNEL)
+                await channel.send('ThesaurusizerBot is now asleep')
+                exit()
         try:
             thesMessage = thesMain(message.content)
             await message.reply(thesMessage)
