@@ -1,3 +1,4 @@
+from xml.etree.ElementTree import register_namespace
 from numpy import character
 import requests
 import re
@@ -13,7 +14,11 @@ def thes(word: str) -> str:
     req = requests.get(url, 'html.parser') # code from the thesaurus.com page for word
     seed(round(time.time() * 1000))
     randSynNum = randint(1, 5)
-    return(req.text.split('href="/browse/')[randSynNum].split('"')[0].replace('%20', ' ').replace('%27', '\''))
+    wordSyn = req.text.split('href="/browse/')[randSynNum].split('"')[0] # synonym for word
+    for a in wordSyn.split('%')[1:]: 
+        hexCode = a[0:2] # hex value of a non-alphanumreric is two characters following '%'
+        wordSyn = wordSyn.replace(str('%' + hexCode), bytes.fromhex(hexCode).decode('utf-8'))
+    return(wordSyn)
 
 # ---return the characters attached to word (quotes, parentheses, etc.)---
 def getNonLetters(word: str, wordLets: str) -> str:
