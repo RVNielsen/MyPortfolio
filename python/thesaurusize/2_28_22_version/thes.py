@@ -47,7 +47,7 @@ def thesMain(message: str) -> str:
     aFlag = False # was previous character 'a'
     anFlag = False # was previous character 'an'
     dqEven = 1 # is there an even number of double quotes
-    message = re.sub(' +', ' ', message.replace('\n', ' '))
+    message = re.sub(' +', ' ', message[3:].replace('\n', ' '))
     comFile = open('commonWords.txt', 'r')
     comWords = str(comFile.read())
     for word in re.split(' |-|\n', message):
@@ -97,4 +97,4 @@ def thesMain(message: str) -> str:
                     elif c != '\'':
                         thesMessage += c
                     prevChar = c
-    return(thesMessage[3:])
+    return(thesMessage)
