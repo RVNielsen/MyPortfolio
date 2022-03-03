@@ -51,7 +51,7 @@ def thesMain(message: str) -> str:
     comWords = str(comFile.read())
     for word in re.split(' |-|\n', message):
         if bool(word):
-            chars = '`' # characters attached to word ('`' means none)
+            chars = '`' # non-alphanumeric characters attached to word ('`' means none)
             addedToTM = False # has word been added to thesMessage
             prevChar = '' # previous character
             wordLets = '' # letters in the word
