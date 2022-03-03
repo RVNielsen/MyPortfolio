@@ -1,4 +1,3 @@
-from xml.etree.ElementTree import register_namespace
 from numpy import character
 import requests
 import re
@@ -41,7 +40,7 @@ def shouldAddSpace(prevChar: character, c: character, dqEven: int) -> bool:
     else:
         return(True)
 
-# ---take discord message as input and return the message with synonyms in place of uncommon words---
+# ---return the discord message with synonyms in place of uncommon words---
 def thesMain(message: str) -> str:
     thesMessage = '' # Thesaurusized message to be returned 
     aFlag = False # was previous character 'a'

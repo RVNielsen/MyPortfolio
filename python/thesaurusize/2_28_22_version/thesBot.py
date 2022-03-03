@@ -22,7 +22,6 @@ async def on_ready():
 
     print(f'{client.user} is connected to the following guild:\n{guild.name}(id: {guild.id})', flush=True)
 
-
 @client.event
 async def on_message(message):
     if message.author == client.user:
