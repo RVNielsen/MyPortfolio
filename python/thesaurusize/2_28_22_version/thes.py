@@ -1,4 +1,3 @@
-from numpy import character
 import requests
 import re
 from random import seed
@@ -19,27 +18,6 @@ def thes(word: str) -> str:
         wordSyn = wordSyn.replace(str('%' + hexCode), bytes.fromhex(hexCode).decode('utf-8'))
     return(wordSyn)
 
-# ---return the characters attached to word (quotes, parentheses, etc.)---
-def getNonLetters(word: str, wordLets: str) -> str:
-    chars = '' # characters attached to word
-    for let in word:
-        if let not in wordLets:
-            chars += let
-        else:
-            chars += '`'
-    return(chars)
-
-# ---return True or False if a space should be added before the current word---
-def shouldAddSpace(prevChar: character, c: character, dqEven: int) -> bool:
-    if prevChar == '(':
-        return(False)
-    elif prevChar.isnumeric() and c == '.':
-        return(False)
-    elif prevChar == '"' and dqEven == 0:
-        return(False)
-    else:
-        return(True)
-
 # ---return the discord message with synonyms in place of uncommon words---
 def thesMain(message: str) -> str:
     thesMessage = '' # Thesaurusized message to be returned 
@@ -52,13 +30,11 @@ def thesMain(message: str) -> str:
     for word in re.split(' |-|\n', message):
         if bool(word):
             chars = '`' # non-alphanumeric characters attached to word ('`' means none)
-            addedToTM = False # has word been added to thesMessage
-            prevChar = '' # previous character
             wordLets = '' # letters in the word
             wordSyn = str(word) # synonymn of the word
             if re.match(r'[^0-9]', word):
                 wordLets = re.sub(r'[^a-zA-Z\']', '', word)
-                chars = getNonLetters(word, wordLets)
+                chars = re.sub(r'[a-zA-Z]', '`', word)
                 if wordLets.lower() in comWords:
                     wordSyn = wordLets
                 else:
@@ -79,21 +55,19 @@ def thesMain(message: str) -> str:
                     anFlag = True
                 else:
                     anFlag = False
+            firstChar = True
+            addedToTM = False
             for c in chars:
+                if firstChar == True:
+                    thesMessage += ' '
                 if c == '`':
                     if addedToTM == False:
-                        if shouldAddSpace(prevChar, c, dqEven):
-                            thesMessage += ' '
                         addedToTM = True
                         thesMessage += wordSyn
+                elif c == '"':
+                    dqEven = (dqEven + 1) % 2
                 else:
-                    if c == '"':
-                        if dqEven == 1:
-                            thesMessage += ' '
-                        dqEven = (dqEven + 1) % 2
-                    elif c == '(':
-                        thesMessage += ' ('
-                    elif c != '\'':
-                        thesMessage += c
-                    prevChar = c
+                    thesMessage += c
+                if firstChar == True:
+                    firstChar = False
     return(thesMessage)
