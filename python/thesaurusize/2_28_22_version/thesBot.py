@@ -28,7 +28,9 @@ async def on_message(message):
         return
 
     
-    if message.content[0:3] == 'T: ':
+    if message.content == 'T: help':
+        await message.channel.send('Welcome to the Thesaurusizer Bot!\nThis bot will take a word, phrase, or small paragraph and replace each uncommon word with a \"synonym\". Who needs grammarly when you have the Thesaurusizer to spice up your writing?\n\nUse \'T: \' to Thesaurusize your message.\n**Example**\nT: This is an example\n**Reply from ThesaurusizerBot**\nThis is an illustration')
+    elif message.content[0:3] == 'T: ':
         if message.author.id == AUTHOR:
             if message.content == 'T: quit':
                 channel = client.get_channel(CHANNEL)
@@ -40,7 +42,5 @@ async def on_message(message):
         except:
             await message.reply('**Oops, error! :(**')
 
-    if message.content == 'T: help':
-        await message.channel.send('Welcome to the Thesaurusizer Bot!\nThis bot will take a word, phrase, or small paragraph and replace each uncommon word with a \"synonym\". Who needs grammarly when you have this to spice up your writing?\n\nUse \'T: \' to Thesaurusize your message.\n**Example**\nT: This is an example\n**Reply from ThesaurusizerBot**\nThis is an illustration')
 
 client.run(TOKEN)
