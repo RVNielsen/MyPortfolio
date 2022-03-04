@@ -49,19 +49,12 @@ def thesMain(message: str) -> str:
                     thesMessage += 'n'
                 elif anFlag == True and wordSyn[0] not in VOWELS:
                     thesMessage = thesMessage[:-1]
-                if wordLets.lower() == 'a':
-                    aFlag = True
-                else:
-                    aFlag = False
-                if wordLets.lower() == 'an':
-                    anFlag = True
-                else:
-                    anFlag = False
+                aFlag = True if wordLets.lower() == 'a' else False
+                anFlag = True if wordLets.lower() == 'an' else False
             firstChar = True
             addedToTM = False
             for c in chars:
-                if firstChar == True:
-                    thesMessage += ' '
+                thesMessage += ' ' if firstChar == True else None
                 if c == '`':
                     if addedToTM == False:
                         addedToTM = True
@@ -70,6 +63,5 @@ def thesMain(message: str) -> str:
                     dqEven = (dqEven + 1) % 2
                 else:
                     thesMessage += c
-                if firstChar == True:
-                    firstChar = False
+                firstChar = False if firstChar == True else None
     return(thesMessage)
