@@ -33,11 +33,12 @@ def thesMain(message: str) -> str:
             wordLets = '' # letters in the word
             wordSyn = str(word) # synonymn of the word
             if re.match(r'[^0-9]', word):
-                wordLets = re.sub(r'[^a-zA-Z\']', '', word)
-                chars = re.sub(r'[a-zA-Z]', '`', word)
+                wordLets = re.sub(r'[^a-zA-Z\'\.]', '', word)
                 if wordLets.lower() in comWords:
+                    chars = re.sub(r'[a-zA-Z\'\.]', '`', word)
                     wordSyn = wordLets
                 else:
+                    chars = re.sub(r'[a-zA-Z]', '`', word)
                     wordSyn = thes(wordLets)
                     if wordLets.isupper():
                         wordSyn = wordSyn.upper()
