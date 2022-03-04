@@ -38,6 +38,7 @@ def thesMain(message: str) -> str:
                     chars = re.sub(r'[a-zA-Z\'\.]', '`', word)
                     wordSyn = wordLets
                 else:
+                    wordLets = re.sub(r'[\'\.]', '', wordLets)
                     chars = re.sub(r'[a-zA-Z]', '`', word)
                     wordSyn = thes(wordLets)
                     if wordLets.isupper():
