@@ -5,14 +5,16 @@ from random import randint
 import time
 
 VOWELS = ['a', 'e', 'i', 'o', 'u']
+TOLERANCE = 10
 
 # ---return a random synonym from thesaurus.com for word--- 
 def thes(word: str) -> str:
     url = 'https://www.thesaurus.com/browse/' + word # webaddress for thesuarus.com page for word
     req = requests.get(url, 'html.parser') # code from the thesaurus.com page for word
     seed(round(time.time() * 1000))
-    randSynNum = randint(1, 5)
-    wordSyn = req.text.split('href="/browse/')[randSynNum].split('"')[0] # synonym for word
+    allSyns = req.text.split('href="/browse/')
+    randSynNum = randint(1, min(len(allSyns) - 1, TOLERANCE))
+    wordSyn = allSyns[randSynNum].split('"')[0] # synonym for word
     for a in wordSyn.split('%')[1:]: 
         hexCode = a[0:2] # hex value of a non-alphanumreric is two characters following '%'
         wordSyn = wordSyn.replace(str('%' + hexCode), bytes.fromhex(hexCode).decode('utf-8'))
@@ -54,7 +56,8 @@ def thesMain(message: str) -> str:
             firstChar = True
             addedToTM = False
             for c in chars:
-                thesMessage += ' ' if firstChar == True else None
+                if firstChar == True:
+                    thesMessage += ' ' 
                 if c == '`':
                     if addedToTM == False:
                         addedToTM = True
@@ -63,5 +66,6 @@ def thesMain(message: str) -> str:
                     dqEven = (dqEven + 1) % 2
                 else:
                     thesMessage += c
-                firstChar = False if firstChar == True else None
+                if firstChar == True:
+                    firstChar = False 
     return(thesMessage)
